@@ -79,7 +79,7 @@ export function Navbar() {
           className="flex items-center space-x-2 rtl:space-x-reverse cursor-pointer"
         >
           <Terminal className="h-6 w-6 text-primary" />
-          <span className="font-bold text-lg tracking-tight">Nader</span>
+          <span className="font-bold text-lg tracking-tight">{t("home.title", "Nader")}</span>
         </Link>
 
         {/* Desktop Links */}
@@ -111,19 +111,19 @@ export function Navbar() {
           <Sheet>
             <SheetTrigger className="hover:bg-accent hover:text-accent-foreground h-9 w-9 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0">
               <Menu className="h-6 w-6" />
-              <span className="sr-only">Toggle Menu</span>
+              <span className="sr-only">{t("nav.toggle", "Toggle Menu")}</span>
             </SheetTrigger>
             <SheetContent
               side={i18n.language === "ar" ? "right" : "left"}
               className="flex flex-col"
             >
-              <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+              <SheetTitle className="sr-only">{t("nav.menu.title", "Navigation Menu")}</SheetTitle>
               <SheetDescription className="sr-only">
-                Links to navigate the portfolio
+                {t("nav.menu.desc", "Links to navigate the portfolio")}
               </SheetDescription>
               <div className="flex items-center space-x-2 rtl:space-x-reverse mt-6 mb-8">
                 <Terminal className="h-6 w-6 text-primary" />
-                <span className="font-bold text-lg tracking-tight">Nader</span>
+                <span className="font-bold text-lg tracking-tight">{t("home.title", "Nader")}</span>
               </div>
               <div className="flex flex-col space-y-4">
                 {links.map((link) => (
