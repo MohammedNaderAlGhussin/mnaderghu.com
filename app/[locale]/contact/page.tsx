@@ -84,16 +84,18 @@ export default function Contact() {
               variants={itemVariants}
               className="text-4xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight font-heading tracking-tighter"
             >
-              {t("contact.title", "Let's Talk")}
+              {String(t("contact.title", "Let's Talk"))}
               <span className="text-primary">.</span>
             </motion.h1>
             <motion.p
               variants={itemVariants}
               className="text-xl md:text-2xl text-muted-foreground mx-auto max-w-3xl leading-relaxed font-body"
             >
-              {t(
-                "contact.subtitle",
-                "Have a project in mind or just want to say hi? I'm always open to discussing new opportunities and creative collaborations.",
+              {String(
+                t(
+                  "contact.subtitle",
+                  "Have a project in mind or just want to say hi? I'm always open to discussing new opportunities and creative collaborations.",
+                ),
               )}
             </motion.p>
           </section>
@@ -105,7 +107,7 @@ export default function Contact() {
                 variants={itemVariants}
                 className="text-2xl font-black uppercase tracking-[0.2em] text-primary font-heading"
               >
-                {t("contact.info.title", "Contact Information")}
+                {String(t("contact.info.title", "Contact Information"))}
               </motion.h2>
 
               <div className="space-y-12">
@@ -123,9 +125,11 @@ export default function Contact() {
                     </div>
                     <div>
                       <h3 className="text-xs font-black text-muted-foreground uppercase tracking-widest mb-1">
-                        {t(
-                          `contact.info.${item.label.toLowerCase()}`,
-                          item.label,
+                        {String(
+                          t(
+                            `contact.info.${item.label.toLowerCase()}`,
+                            item.label,
+                          ),
                         )}
                       </h3>
                       <p className="text-xl md:text-2xl font-bold font-body">
@@ -138,7 +142,7 @@ export default function Contact() {
 
               <motion.div variants={itemVariants} className="pt-12 space-y-6">
                 <h3 className="text-xs font-black text-muted-foreground uppercase tracking-widest">
-                  {t("contact.social.title", "Digital Presence")}
+                  {String(t("contact.social.title", "Digital Presence"))}
                 </h3>
                 <div className="flex gap-4">
                   {[Linkedin, Github, Twitter].map((Icon, i) => (
@@ -157,9 +161,11 @@ export default function Contact() {
                 <Card className="bg-primary/5 border-primary/10 shadow-2xl rounded-[2rem] overflow-hidden">
                   <CardContent className="p-10">
                     <p className="text-xl font-medium leading-relaxed font-body">
-                      {t(
-                        "contact.availability",
-                        "I'm currently looking for new full-time roles or freelance projects. I usually respond within 12-24 hours. Let's build something amazing together!",
+                      {String(
+                        t(
+                          "contact.availability",
+                          "I'm currently looking for new full-time roles or freelance projects. I usually respond within 12-24 hours. Let's build something amazing together!",
+                        ),
                       )}
                     </p>
                   </CardContent>
@@ -182,7 +188,7 @@ export default function Contact() {
                     >
                       <div className="space-y-3">
                         <label className="text-sm font-black uppercase tracking-widest text-muted-foreground ml-1">
-                          {t("contact.form.name", "Your Name")}
+                          {String(t("contact.form.name", "Your Name"))}
                         </label>
                         <Input
                           placeholder="John Doe"
@@ -198,7 +204,7 @@ export default function Contact() {
 
                       <div className="space-y-3">
                         <label className="text-sm font-black uppercase tracking-widest text-muted-foreground ml-1">
-                          {t("contact.form.email", "Email Address")}
+                          {String(t("contact.form.email", "Email Address"))}
                         </label>
                         <Input
                           type="email"
@@ -215,7 +221,7 @@ export default function Contact() {
 
                       <div className="space-y-3">
                         <label className="text-sm font-black uppercase tracking-widest text-muted-foreground ml-1">
-                          {t("contact.form.message", "Message")}
+                          {String(t("contact.form.message", "Message"))}
                         </label>
                         <Textarea
                           placeholder="Tell me about your project..."
@@ -244,7 +250,7 @@ export default function Contact() {
                               className="flex items-center justify-center"
                             >
                               <Loader2 className="mr-3 h-6 w-6 animate-spin" />
-                              {t("contact.form.sending", "Processing")}
+                              {String(t("contact.form.sending", "Processing"))}
                             </motion.div>
                           ) : isSuccess ? (
                             <motion.div
@@ -255,14 +261,14 @@ export default function Contact() {
                               className="flex items-center justify-center text-green-400"
                             >
                               <CheckCircle className="mr-3 h-6 w-6" />
-                              {t("contact.form.sent", "Success!")}
+                              {String(t("contact.form.sent", "Success!"))}
                             </motion.div>
                           ) : (
                             <motion.div
                               key="idle"
                               className="flex items-center justify-center group-hover:scale-105 transition-transform"
                             >
-                              {t("contact.form.submit", "Send Message")}
+                              {String(t("contact.form.submit", "Send Message"))}
                               <Send className="ml-3 h-5 w-5 rtl:-scale-x-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                             </motion.div>
                           )}
