@@ -62,7 +62,7 @@ export default function Home() {
               className="flex flex-col items-center lg:items-start rtl:lg:items-end"
             >
               <span className="text-5xl md:text-6xl font-black text-primary mb-2">
-                5+
+                {t("home.stats.experience.val", "5+")}
               </span>
               <span className="text-sm md:text-base font-medium text-muted-foreground uppercase tracking-wider">
                 {t("home.stats.experience", "Years of Experience")}
@@ -76,7 +76,7 @@ export default function Home() {
               className="flex flex-col items-center lg:items-center rtl:lg:items-center"
             >
               <span className="text-5xl md:text-6xl font-black text-primary mb-2">
-                40+
+                {t("home.stats.projects.val", "40+")}
               </span>
               <span className="text-sm md:text-base font-medium text-muted-foreground uppercase tracking-wider">
                 {t("home.stats.projects", "Projects Built")}
@@ -90,7 +90,7 @@ export default function Home() {
               className="flex flex-col items-center lg:items-end rtl:lg:items-start"
             >
               <span className="text-5xl md:text-6xl font-black text-primary mb-2">
-                25+
+                {t("home.stats.clients.val", "25+")}
               </span>
               <span className="text-sm md:text-base font-medium text-muted-foreground uppercase tracking-wider">
                 {t("home.stats.clients", "Happy Clients")}
