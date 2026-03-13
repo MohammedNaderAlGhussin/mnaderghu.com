@@ -1,0 +1,150 @@
+"use client";
+
+import * as React from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useTranslation } from "react-i18next";
+import { Menu, Terminal } from "lucide-react";
+import { ThemeToggle } from "./ThemeToggle";
+import LanguageSwitcher from "./LanguageSwitcher";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetTitle,
+  SheetDescription,
+} from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
+import { i18nConfig } from "@/i18nConfig";
+
+export function Navbar() {
+  const { t, i18n } = useTranslation("common");
+  const pathname = usePathname();
+  const [isScrolled, setIsScrolled] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const links = [
+    { href: "/", label: t("nav.home", "Home") },
+    { href: "/about", label: t("nav.about", "About") },
+    { href: "/skills", label: t("nav.skills", "Skills") },
+    { href: "/projects", label: t("nav.projects", "Projects") },
+    { href: "/experience", label: t("nav.experience", "Experience") },
+    { href: "/contact", label: t("nav.contact", "Contact") },
+  ];
+
+  /* 
+    Determine href and active state.
+    Because next-i18n-router keeps /en/about but also just /about if it's default (sometimes).
+    It's safer to always direct to /locale/path.
+  */
+  const getHref = (path: string) => {
+    return `/${i18n.language}${path === "/" ? "" : path}`;
+  };
+
+  const isActive = (path: string) => {
+    const segments = pathname.split("/").filter(Boolean);
+    const isDefaultUnprefixed = !i18nConfig.locales.includes(segments[0]);
+    const currentLoc = isDefaultUnprefixed
+      ? i18nConfig.defaultLocale
+      : segments[0];
+
+    // strip locale and compare
+    const strippedPath = isDefaultUnprefixed
+      ? pathname
+      : pathname.replace(`/${currentLoc}`, "");
+    const cleanPath = strippedPath === "" ? "/" : strippedPath;
+
+    return cleanPath === path;
+  };
+
+  return (
+    <nav
+      className={cn(
+        "sticky top-0 z-50 w-full transition-all duration-300",
+        isScrolled
+          ? "bg-background/80 backdrop-blur-md border-b border-primary/20 shadow-sm"
+          : "bg-transparent border-b border-transparent",
+      )}
+    >
+      <div className="container mx-auto px-4 lg:px-8 flex items-center justify-between h-16">
+        <Link
+          href={getHref("/")}
+          className="flex items-center space-x-2 rtl:space-x-reverse cursor-pointer"
+        >
+          <Terminal className="h-6 w-6 text-primary" />
+          <span className="font-bold text-lg tracking-tight">Nader</span>
+        </Link>
+
+        {/* Desktop Links */}
+        <div className="hidden md:flex items-center space-x-6 rtl:space-x-reverse">
+          {links.map((link) => (
+            <Link
+              key={link.href}
+              href={getHref(link.href)}
+              className={cn(
+                "text-sm font-medium transition-colors hover:text-primary",
+                isActive(link.href)
+                  ? "text-primary border-b-2 border-primary"
+                  : "text-muted-foreground",
+              )}
+            >
+              {link.label}
+            </Link>
+          ))}
+          <div className="flex items-center space-x-2 rtl:space-x-reverse ml-4 rtl:ml-0 rtl:mr-4 border-l rtl:border-l-0 rtl:border-r border-border pl-4 rtl:pl-0 rtl:pr-4">
+            <ThemeToggle />
+            <LanguageSwitcher />
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        <div className="flex md:hidden items-center space-x-2 rtl:space-x-reverse">
+          <ThemeToggle />
+          <LanguageSwitcher />
+          <Sheet>
+            <SheetTrigger className="hover:bg-accent hover:text-accent-foreground h-9 w-9 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0">
+              <Menu className="h-6 w-6" />
+              <span className="sr-only">Toggle Menu</span>
+            </SheetTrigger>
+            <SheetContent
+              side={i18n.language === "ar" ? "right" : "left"}
+              className="flex flex-col"
+            >
+              <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+              <SheetDescription className="sr-only">
+                Links to navigate the portfolio
+              </SheetDescription>
+              <div className="flex items-center space-x-2 rtl:space-x-reverse mt-6 mb-8">
+                <Terminal className="h-6 w-6 text-primary" />
+                <span className="font-bold text-lg tracking-tight">Nader</span>
+              </div>
+              <div className="flex flex-col space-y-4">
+                {links.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={getHref(link.href)}
+                    className={cn(
+                      "text-lg font-medium transition-colors hover:text-primary",
+                      isActive(link.href)
+                        ? "text-primary"
+                        : "text-muted-foreground",
+                    )}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
+      </div>
+    </nav>
+  );
+}
