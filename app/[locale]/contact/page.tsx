@@ -94,7 +94,7 @@ export default function Contact() {
                   <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-1">
                     {t("contact.info.location", "Location")}
                   </h3>
-                  <p className="text-xl font-medium">Gaza, Palestine</p>
+                  <p className="text-xl font-medium">{t("contact.info.location.val", "Gaza, Palestine")}</p>
                 </div>
               </div>
 
@@ -106,7 +106,7 @@ export default function Contact() {
                   <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-1">
                     {t("contact.info.email", "Email")}
                   </h3>
-                  <p className="text-xl font-medium">hello@nader.dev</p>
+                  <p className="text-xl font-medium">{t("contact.info.email.val", "hello@nader.dev")}</p>
                 </div>
               </div>
             </div>
