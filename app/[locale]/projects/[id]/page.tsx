@@ -12,14 +12,16 @@ export default function SingleProject({
 }: {
   params: Promise<{ id: string; locale: string }>;
 }) {
-  const { t, i18n } = useTranslation("common");
+  const { t } = useTranslation("common");
   const resolvedParams = React.use(params);
   const { id, locale } = resolvedParams;
 
-  const title = id
+  const defaultTitle = id
     .split("-")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
+
+  const title = t(`projects.${id}.title`, defaultTitle);
 
   return (
     <div className="container mx-auto px-4 lg:px-8 py-16 md:py-24">
@@ -65,8 +67,11 @@ export default function SingleProject({
           </h2>
           <p className="text-muted-foreground text-lg leading-relaxed">
             {t(
-              "project.overview.desc",
-              "A comprehensive redesign of a high-traffic analytics platform, focusing on user experience, performance optimization, and modern aesthetic principles. The challenge was to transform complex data sets into intuitive, actionable insights for enterprise-level decision makers.",
+              `projects.${id}.overview.desc`,
+              t(
+                "project.overview.desc",
+                "A comprehensive redesign of a high-traffic analytics platform, focusing on user experience, performance optimization, and modern aesthetic principles.",
+              ),
             )}
           </p>
         </section>
@@ -136,12 +141,12 @@ export default function SingleProject({
             {t("project.tech.title", "Technical Details")}
           </h2>
           <blockquote className="text-muted-foreground italic text-lg lg:text-xl leading-relaxed border-l-4 border-primary pl-6 rtl:pl-0 rtl:border-l-0 rtl:pr-6 rtl:border-r-4 py-3 my-6 bg-secondary/20 rounded-r-lg rtl:rounded-l-lg rtl:rounded-r-none">
-            "
+            &quot;
             {t(
               "project.tech.quote",
               "The main technical hurdle was managing state for thousands of concurrent data points. We implemented a custom Redux middleware and memoized React components to ensure 60FPS performance even during heavy data spikes.",
             )}
-            "
+            &quot;
           </blockquote>
 
           <div className="pt-4 border-t border-border/50">
@@ -150,16 +155,16 @@ export default function SingleProject({
             </h3>
             <div className="flex flex-wrap gap-2">
               <Badge variant="secondary" className="px-4 py-1.5 text-sm">
-                React
+                {t("tech.react", "React")}
               </Badge>
               <Badge variant="secondary" className="px-4 py-1.5 text-sm">
-                Redux
+                {t("tech.redux", "Redux")}
               </Badge>
               <Badge variant="secondary" className="px-4 py-1.5 text-sm">
-                WebSockets
+                {t("tech.websockets", "WebSockets")}
               </Badge>
               <Badge variant="secondary" className="px-4 py-1.5 text-sm">
-                Tailwind CSS
+                {t("tech.tailwind", "Tailwind CSS")}
               </Badge>
             </div>
           </div>
