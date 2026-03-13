@@ -26,69 +26,80 @@ export default function Projects() {
   const projects = [
     {
       id: "ai-analytics-dashboard",
-      title: t(
-        "projects.ai-analytics-dashboard.title",
-        "AI Analytics Dashboard",
+      title: String(
+        t("projects.ai-analytics-dashboard.title", "AI Analytics Dashboard"),
       ),
       category: "Full-Stack",
-      description: t(
-        "projects.ai-analytics-dashboard.desc",
-        "A real-time predictive analytics dashboard for SaaS platforms using OpenAI APIs and dynamic data streaming.",
+      description: String(
+        t(
+          "projects.ai-analytics-dashboard.desc",
+          "A real-time predictive analytics dashboard for SaaS platforms using OpenAI APIs and dynamic data streaming.",
+        ),
       ),
       link: `/${i18n.language}/projects/ai-analytics-dashboard`,
       tech: ["React", "Next.js", "Redux", "Tailwind"],
     },
     {
       id: "ecommerce-engine",
-      title: t("projects.ecommerce-engine.title", "E-commerce Engine"),
+      title: String(t("projects.ecommerce-engine.title", "E-commerce Engine")),
       category: "Full-Stack",
-      description: t(
-        "projects.ecommerce-engine.desc",
-        "High-performance storefront with headless CMS integration, global state management, and Stripe payments.",
+      description: String(
+        t(
+          "projects.ecommerce-engine.desc",
+          "High-performance storefront with headless CMS integration, global state management, and Stripe payments.",
+        ),
       ),
       link: `/${i18n.language}/projects/ecommerce-engine`,
       tech: ["Next.js", "Stripe", "Sanity", "Zustand"],
     },
     {
       id: "web3-wallet",
-      title: t("projects.web3-wallet.title", "Web3 Wallet Tracker"),
+      title: String(t("projects.web3-wallet.title", "Web3 Wallet Tracker")),
       category: "Frontend",
-      description: t(
-        "projects.web3-wallet.desc",
-        "Multi-chain portfolio visualizer with live pricing, transaction history, and NFT gallery integration.",
+      description: String(
+        t(
+          "projects.web3-wallet.desc",
+          "Multi-chain portfolio visualizer with live pricing, transaction history, and NFT gallery integration.",
+        ),
       ),
       link: `/${i18n.language}/projects/web3-wallet`,
       tech: ["Ethers.js", "React", "Tailwind", "Wagmi"],
     },
     {
       id: "sentinel-security",
-      title: t("projects.sentinel-security.title", "Sentinel Security"),
+      title: String(t("projects.sentinel-security.title", "Sentinel Security")),
       category: "Backend",
-      description: t(
-        "projects.sentinel-security.desc",
-        "Infrastructure monitoring tool for cloud deployments with automated threat detection and alert systems.",
+      description: String(
+        t(
+          "projects.sentinel-security.desc",
+          "Infrastructure monitoring tool for cloud deployments with automated threat detection and alert systems.",
+        ),
       ),
       link: `/${i18n.language}/projects/sentinel-security`,
       tech: ["Python", "Docker", "AWS", "PostgreSQL"],
     },
     {
       id: "healthsync-pro",
-      title: t("projects.healthsync-pro.title", "HealthSync Pro"),
+      title: String(t("projects.healthsync-pro.title", "HealthSync Pro")),
       category: "UI Design",
-      description: t(
-        "projects.healthsync-pro.desc",
-        "A cross-platform health application integrating wearable data for holistic lifestyle coaching.",
+      description: String(
+        t(
+          "projects.healthsync-pro.desc",
+          "A cross-platform health application integrating wearable data for holistic lifestyle coaching.",
+        ),
       ),
       link: `/${i18n.language}/projects/healthsync-pro`,
       tech: ["Figma", "React Native"],
     },
     {
       id: "nexus-editor",
-      title: t("projects.nexus-editor.title", "Nexus Code Editor"),
+      title: String(t("projects.nexus-editor.title", "Nexus Code Editor")),
       category: "Frontend",
-      description: t(
-        "projects.nexus-editor.desc",
-        "Lightweight browser-based IDE with collaborative editing features and real-time compilation.",
+      description: String(
+        t(
+          "projects.nexus-editor.desc",
+          "Lightweight browser-based IDE with collaborative editing features and real-time compilation.",
+        ),
       ),
       link: `/${i18n.language}/projects/nexus-editor`,
       tech: ["Monaco", "WebSockets", "React"],
@@ -109,7 +120,7 @@ export default function Projects() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="text-4xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight font-heading tracking-tighter"
           >
-            {t("projects.hero.title", "My Projects")}
+            {String(t("projects.hero.title", "My Projects"))}
             <span className="text-primary">.</span>
           </motion.h1>
           <motion.p
@@ -119,9 +130,11 @@ export default function Projects() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="text-xl md:text-2xl text-muted-foreground leading-relaxed font-body"
           >
-            {t(
-              "projects.hero.desc",
-              "A curated selection of my professional work and personal experiments in the realm of full-stack development and UI design.",
+            {String(
+              t(
+                "projects.hero.desc",
+                "A curated selection of my professional work and personal experiments in the realm of full-stack development and UI design.",
+              ),
             )}
           </motion.p>
         </section>
@@ -146,7 +159,12 @@ export default function Projects() {
                   : "border-border/50 text-muted-foreground",
               )}
             >
-              {t(`projects.cat.${cat.toLowerCase()}`, cat)}
+              {String(
+                t(
+                  `projects.cat.${cat.toLowerCase().replace("-", "").replace(/\s+/g, "")}`,
+                  cat,
+                ),
+              )}
             </Button>
           ))}
         </motion.section>
@@ -172,9 +190,11 @@ export default function Projects() {
                         variant="secondary"
                         className="bg-primary/10 text-primary border border-primary/20 font-black px-4 py-1 text-[10px] uppercase tracking-widest rounded-lg"
                       >
-                        {t(
-                          `projects.cat.${item.category.toLowerCase().replace("-", "")}`,
-                          item.category,
+                        {String(
+                          t(
+                            `projects.cat.${item.category.toLowerCase().replace("-", "").replace(/\s+/g, "")}`,
+                            item.category,
+                          ),
                         )}
                       </Badge>
                       <ExternalLink className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors hover:scale-125" />
@@ -218,19 +238,21 @@ export default function Projects() {
 
           <div className="relative z-10 px-8">
             <h2 className="text-4xl md:text-7xl font-black mb-10 font-heading tracking-tighter">
-              {t("projects.cta.title", "Ready to collaborate?")}
+              {String(t("projects.cta.title", "Ready to collaborate?"))}
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto mb-16 text-xl md:text-2xl font-body leading-relaxed">
-              {t(
-                "projects.cta.desc",
-                "I'm currently available for freelance work and open-source collaborations. Let's build something amazing together.",
+              {String(
+                t(
+                  "projects.cta.desc",
+                  "I'm currently available for freelance work and open-source collaborations. Let's build something amazing together.",
+                ),
               )}
             </p>
             <Link
               href={`/${i18n.language}/contact`}
               className="inline-flex h-20 items-center justify-center rounded-3xl bg-primary px-16 text-xl font-black text-primary-foreground shadow-2xl transition-all hover:bg-primary/90 hover:scale-105 active:scale-95 uppercase tracking-widest"
             >
-              {t("projects.cta.btn", "Get in touch")}
+              {String(t("projects.cta.btn", "Get in touch"))}
               <ArrowRight className="ml-4 h-6 w-6 rtl:rotate-180" />
             </Link>
           </div>
