@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -22,6 +22,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { DotBackground } from "@/components/ui/aceternity/dot-background";
 
 const contactSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -49,8 +50,7 @@ export default function Contact() {
 
   const onSubmit = async (data: ContactFormValues) => {
     setIsSubmitting(true);
-    // simulate delay
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     console.log("Form Submitted", data);
     setIsSubmitting(false);
     setIsSuccess(true);
@@ -58,200 +58,208 @@ export default function Contact() {
     setTimeout(() => setIsSuccess(false), 5000);
   };
 
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  };
+
   return (
-    <div className="container mx-auto px-4 lg:px-8 py-16 md:py-24">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="max-w-7xl mx-auto space-y-16"
-      >
-        <section className="text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-7xl font-black mb-6 leading-tight">
-            {t("contact.title", "Get in Touch")}
-          </h1>
-          <p className="text-lg md:text-xl md:text-2xl text-muted-foreground mx-auto max-w-3xl leading-relaxed">
-            {t(
-              "contact.subtitle",
-              "Have a project in mind or just want to say hi? I'm always open to discussing new opportunities and creative collaborations.",
-            )}
-          </p>
-        </section>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
-          {/* Info Column */}
-          <section className="space-y-10 order-2 lg:order-1">
-            <h2 className="text-2xl md:text-3xl font-bold border-b border-border/50 pb-4">
-              {t("contact.info.title", "Contact Information")}
-            </h2>
-
-            <div className="space-y-8">
-              <div className="flex items-start gap-4">
-                <div className="p-3 bg-secondary rounded-2xl flex-shrink-0">
-                  <MapPin className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-1">
-                    {t("contact.info.location", "Location")}
-                  </h3>
-                  <p className="text-xl font-medium">{t("contact.info.location.val", "Gaza, Palestine")}</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="p-3 bg-secondary rounded-2xl flex-shrink-0">
-                  <Mail className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-1">
-                    {t("contact.info.email", "Email")}
-                  </h3>
-                  <p className="text-xl font-medium">{t("contact.info.email.val", "hello@nader.dev")}</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-8 space-y-4">
-              <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-                {t("contact.social.title", "Follow me on social media")}
-              </h3>
-              <div className="flex gap-4">
-                <Link
-                  href="#"
-                  className="p-4 bg-secondary rounded-2xl hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_20px_rgba(0,194,255,0.4)] transition-all group"
-                >
-                  <Linkedin className="h-6 w-6 transition-transform group-hover:scale-110" />
-                </Link>
-                <Link
-                  href="#"
-                  className="p-4 bg-secondary rounded-2xl hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_20px_rgba(0,194,255,0.4)] transition-all group"
-                >
-                  <Github className="h-6 w-6 transition-transform group-hover:scale-110" />
-                </Link>
-                <Link
-                  href="#"
-                  className="p-4 bg-secondary rounded-2xl hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_20px_rgba(0,194,255,0.4)] transition-all group"
-                >
-                  <Twitter className="h-6 w-6 transition-transform group-hover:scale-110" />
-                </Link>
-              </div>
-            </div>
-
-            <Card className="bg-primary/5 border-primary/20 shadow-none">
-              <CardContent className="p-6">
-                <p className="text-lg font-medium text-foreground">
-                  {t(
-                    "contact.availability",
-                    "I'm currently looking for new full-time roles or freelance projects. I usually respond within 12-24 hours. Let's build something amazing together!",
-                  )}
-                </p>
-              </CardContent>
-            </Card>
+    <div className="min-h-screen relative overflow-hidden">
+      <DotBackground className="opacity-30" />
+      
+      <div className="container mx-auto px-4 lg:px-8 py-16 md:py-32 relative z-10">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          transition={{ staggerChildren: 0.1 }}
+          className="max-w-7xl mx-auto space-y-24"
+        >
+          <section className="text-center space-y-8">
+            <motion.h1 
+              variants={itemVariants}
+              className="text-4xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight font-heading tracking-tighter"
+            >
+              {t("contact.title", "Let's Talk")}<span className="text-primary">.</span>
+            </motion.h1>
+            <motion.p 
+              variants={itemVariants}
+              className="text-xl md:text-2xl text-muted-foreground mx-auto max-w-3xl leading-relaxed font-body"
+            >
+              {t(
+                "contact.subtitle",
+                "Have a project in mind or just want to say hi? I'm always open to discussing new opportunities and creative collaborations.",
+              )}
+            </motion.p>
           </section>
 
-          {/* Form Column */}
-          <section className="order-1 lg:order-2">
-            <Card className="bg-card/50 backdrop-blur-sm border-border/50 shadow-xl overflow-hidden p-2 md:p-6 lg:p-8 rounded-[2rem]">
-              <CardContent className="pt-6">
-                <form
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-6"
-                >
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="name"
-                      className="text-base font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                      {t("contact.form.name", "Your Name")}
-                    </label>
-                    <Input
-                      id="name"
-                      placeholder={t(
-                        "contact.form.name.placeholder",
-                        "John Doe",
-                      )}
-                      className="h-14 bg-secondary/30 border-secondary focus-visible:ring-primary focus-visible:bg-background transition-all text-base px-5 rounded-xl"
-                      {...form.register("name")}
-                    />
-                    {form.formState.errors.name && (
-                      <p className="text-sm font-medium text-destructive">
-                        {form.formState.errors.name.message}
-                      </p>
-                    )}
-                  </div>
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="email"
-                      className="text-base font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                      {t("contact.form.email", "Email Address")}
-                    </label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder={t(
-                        "contact.form.email.placeholder",
-                        "john@example.com",
-                      )}
-                      className="h-14 bg-secondary/30 border-secondary focus-visible:ring-primary focus-visible:bg-background transition-all text-base px-5 rounded-xl"
-                      {...form.register("email")}
-                    />
-                    {form.formState.errors.email && (
-                      <p className="text-sm font-medium text-destructive">
-                        {form.formState.errors.email.message}
-                      </p>
-                    )}
-                  </div>
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="message"
-                      className="text-base font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                      {t("contact.form.message", "Message")}
-                    </label>
-                    <Textarea
-                      id="message"
-                      placeholder={t(
-                        "contact.form.message.placeholder",
-                        "How can I help you?",
-                      )}
-                      className="min-h-[160px] bg-secondary/30 border-secondary focus-visible:ring-primary focus-visible:bg-background transition-all text-base px-5 py-4 resize-none rounded-xl"
-                      {...form.register("message")}
-                    />
-                    {form.formState.errors.message && (
-                      <p className="text-sm font-medium text-destructive">
-                        {form.formState.errors.message.message}
-                      </p>
-                    )}
-                  </div>
-                  <Button
-                    type="submit"
-                    className="w-full h-14 text-base font-bold rounded-xl shadow-lg hover:shadow-[0_0_20px_rgba(0,194,255,0.4)] transition-all group"
-                    disabled={isSubmitting}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-start">
+            {/* Info Column */}
+            <section className="space-y-12 order-2 lg:order-1">
+              <motion.h2 
+                variants={itemVariants}
+                className="text-2xl font-black uppercase tracking-[0.2em] text-primary font-heading"
+              >
+                {t("contact.info.title", "Contact Information")}
+              </motion.h2>
+
+              <div className="space-y-12">
+                {[
+                  { icon: MapPin, label: "Location", val: "Gaza, Palestine" },
+                  { icon: Mail, label: "Email", val: "hello@mohammed.dev" }
+                ].map((item, i) => (
+                  <motion.div 
+                    key={i}
+                    variants={itemVariants}
+                    className="flex items-start gap-6 group"
                   >
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                        {t("contact.form.sending", "Sending...")}
-                      </>
-                    ) : isSuccess ? (
-                      <>
-                        <CheckCircle className="mr-2 h-5 w-5" />
-                        {t("contact.form.sent", "Message Sent!")}
-                      </>
-                    ) : (
-                      <>
-                        {t("contact.form.submit", "Send Message")}
-                        <Send className="ml-2 h-5 w-5 rtl:-scale-x-100 group-hover:-mt-1 group-hover:ml-3 transition-all" />
-                      </>
-                    )}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-          </section>
-        </div>
-      </motion.div>
+                    <div className="p-4 bg-primary/10 rounded-[1.5rem] border border-primary/20 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+                      <item.icon className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <h3 className="text-xs font-black text-muted-foreground uppercase tracking-widest mb-1">
+                        {t(`contact.info.${item.label.toLowerCase()}`, item.label)}
+                      </h3>
+                      <p className="text-xl md:text-2xl font-bold font-body">{item.val}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              <motion.div variants={itemVariants} className="pt-12 space-y-6">
+                <h3 className="text-xs font-black text-muted-foreground uppercase tracking-widest">
+                  {t("contact.social.title", "Digital Presence")}
+                </h3>
+                <div className="flex gap-4">
+                  {[Linkedin, Github, Twitter].map((Icon, i) => (
+                    <Link
+                      key={i}
+                      href="#"
+                      className="p-5 bg-card border border-border/50 rounded-2xl hover:border-primary/50 hover:bg-primary/5 hover:scale-110 transition-all duration-300"
+                    >
+                      <Icon className="h-6 w-6" />
+                    </Link>
+                  ))}
+                </div>
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <Card className="bg-primary/5 border-primary/10 shadow-2xl rounded-[2rem] overflow-hidden">
+                  <CardContent className="p-10">
+                    <p className="text-xl font-medium leading-relaxed font-body">
+                      {t(
+                        "contact.availability",
+                        "I'm currently looking for new full-time roles or freelance projects. I usually respond within 12-24 hours. Let's build something amazing together!",
+                      )}
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </section>
+
+            {/* Form Column */}
+            <section className="order-1 lg:order-2">
+              <motion.div variants={itemVariants}>
+                <Card className="bg-card/40 backdrop-blur-2xl border-border/10 shadow-2xl rounded-[2rem] p-8 md:p-12 relative overflow-hidden group">
+                  <div className="absolute top-0 right-0 p-8 text-primary overflow-hidden opacity-10 pointer-events-none">
+                    <Send className="h-40 w-40 -rotate-12 translate-x-10 -translate-y-10" />
+                  </div>
+                  
+                  <CardContent className="p-0">
+                    <form
+                      onSubmit={form.handleSubmit(onSubmit)}
+                      className="space-y-8"
+                    >
+                      <div className="space-y-3">
+                        <label className="text-sm font-black uppercase tracking-widest text-muted-foreground ml-1">
+                          {t("contact.form.name", "Your Name")}
+                        </label>
+                        <Input
+                          placeholder="John Doe"
+                          className="h-16 bg-background/50 border-border/50 focus-visible:ring-primary focus-visible:border-primary transition-all text-lg px-6 rounded-2xl font-body"
+                          {...form.register("name")}
+                        />
+                        {form.formState.errors.name && (
+                          <p className="text-sm text-destructive font-bold">{form.formState.errors.name.message}</p>
+                        )}
+                      </div>
+
+                      <div className="space-y-3">
+                        <label className="text-sm font-black uppercase tracking-widest text-muted-foreground ml-1">
+                          {t("contact.form.email", "Email Address")}
+                        </label>
+                        <Input
+                          type="email"
+                          placeholder="hello@example.com"
+                          className="h-16 bg-background/50 border-border/50 focus-visible:ring-primary focus-visible:border-primary transition-all text-lg px-6 rounded-2xl font-body"
+                          {...form.register("email")}
+                        />
+                        {form.formState.errors.email && (
+                          <p className="text-sm text-destructive font-bold">{form.formState.errors.email.message}</p>
+                        )}
+                      </div>
+
+                      <div className="space-y-3">
+                        <label className="text-sm font-black uppercase tracking-widest text-muted-foreground ml-1">
+                          {t("contact.form.message", "Message")}
+                        </label>
+                        <Textarea
+                          placeholder="Tell me about your project..."
+                          className="min-h-[200px] bg-background/50 border-border/50 focus-visible:ring-primary focus-visible:border-primary transition-all text-lg p-6 rounded-2xl font-body resize-none"
+                          {...form.register("message")}
+                        />
+                        {form.formState.errors.message && (
+                          <p className="text-sm text-destructive font-bold">{form.formState.errors.message.message}</p>
+                        )}
+                      </div>
+
+                      <Button
+                        type="submit"
+                        className="w-full h-16 text-lg font-black uppercase tracking-[0.2em] rounded-2xl shadow-2xl hover:shadow-primary/20 transition-all duration-300 relative group overflow-hidden"
+                        disabled={isSubmitting}
+                      >
+                        <AnimatePresence mode="wait">
+                          {isSubmitting ? (
+                            <motion.div
+                              key="submitting"
+                              initial={{ opacity: 0, y: 10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0, y: -10 }}
+                              className="flex items-center justify-center"
+                            >
+                              <Loader2 className="mr-3 h-6 w-6 animate-spin" />
+                              {t("contact.form.sending", "Processing")}
+                            </motion.div>
+                          ) : isSuccess ? (
+                            <motion.div
+                              key="success"
+                              initial={{ opacity: 0, scale: 0.8 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              transition={{ type: "spring" }}
+                              className="flex items-center justify-center text-green-400"
+                            >
+                              <CheckCircle className="mr-3 h-6 w-6" />
+                              {t("contact.form.sent", "Success!")}
+                            </motion.div>
+                          ) : (
+                            <motion.div
+                              key="idle"
+                              className="flex items-center justify-center group-hover:scale-105 transition-transform"
+                            >
+                              {t("contact.form.submit", "Send Message")}
+                              <Send className="ml-3 h-5 w-5 rtl:-scale-x-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </Button>
+                    </form>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </section>
+          </div>
+        </motion.div>
+      </div>
     </div>
   );
 }
