@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Cairo } from "next/font/google";
+import { Geist, Inter, Cairo, Outfit } from "next/font/google";
 import "../globals.css";
 import { dir } from "i18next";
 import { i18nConfig } from "@/i18nConfig";
@@ -9,13 +9,13 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const geist = Geist({
+  variable: "--font-geist",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
@@ -48,7 +48,7 @@ export default async function RootLayout(props: {
   return (
     <html lang={locale} dir={dir(locale)} suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${cairo.variable} antialiased min-h-screen bg-background text-foreground`}
+        className={`${geist.variable} ${inter.variable} ${cairo.variable} font-body antialiased min-h-screen bg-background text-foreground`}
         suppressHydrationWarning
       >
         <ThemeProvider
