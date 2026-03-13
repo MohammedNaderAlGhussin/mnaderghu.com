@@ -12,7 +12,7 @@ export default function SingleProject({
 }: {
   params: Promise<{ id: string; locale: string }>;
 }) {
-  const { t, i18n } = useTranslation("common");
+  const { t } = useTranslation("common");
   const resolvedParams = React.use(params);
   const { id, locale } = resolvedParams;
 
@@ -30,47 +30,57 @@ export default function SingleProject({
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 
-  const title = t(`projects.${id}.title`, defaultTitle);
+  const title = String(t(`projects.${id}.title`, defaultTitle));
 
   const stats = [
-    { label: t("project.stats.time", "Timeline"), value: "3 Months" },
-    { label: t("project.stats.role", "My Role"), value: "Lead dev" },
-    { label: t("project.stats.client", "Client"), value: "Fortune 500" },
-    { label: t("project.stats.tech", "Stack"), value: "Modern Web" },
+    { label: String(t("project.stats.time", "Timeline")), value: "3 Months" },
+    { label: String(t("project.stats.role", "My Role")), value: "Lead dev" },
+    {
+      label: String(t("project.stats.client", "Client")),
+      value: "Fortune 500",
+    },
+    { label: String(t("project.stats.tech", "Stack")), value: "Modern Web" },
   ];
 
   return (
-    <div ref={containerRef} className="container mx-auto px-4 lg:px-8 py-16 md:py-24 overflow-hidden">
+    <div
+      ref={containerRef}
+      className="container mx-auto px-4 lg:px-8 py-16 md:py-24 overflow-hidden"
+    >
       <div className="max-w-4xl mx-auto space-y-16">
         <Link
           href={`/${locale}/projects`}
           className="inline-flex items-center text-muted-foreground hover:text-primary transition-all text-sm font-black uppercase tracking-[0.2em] mb-8 group"
         >
           <ArrowLeft className="mr-3 h-5 w-5 rtl:ml-3 rtl:mr-0 rtl:-scale-x-100 group-hover:-translate-x-2 transition-transform rtl:group-hover:translate-x-2" />
-          {t("project.back", "Back to Projects")}
+          {String(t("project.back", "Back to Projects"))}
         </Link>
 
         {/* Header */}
         <header className="space-y-6">
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="text-4xl md:text-7xl lg:text-8xl font-black text-foreground font-heading lowercase tracking-tighter"
           >
-            {title}<span className="text-primary">.</span>
+            {title}
+            <span className="text-primary">.</span>
           </motion.h1>
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="flex flex-wrap items-center gap-6"
           >
             <p className="text-primary font-black text-xl uppercase tracking-widest font-heading">
-              {t("project.completed", "Case Study / 2024")}
+              {String(t("project.completed", "Case Study / 2024"))}
             </p>
             <div className="h-px w-12 bg-border" />
-            <Badge variant="outline" className="px-4 py-1 rounded-full border-primary/30 text-primary font-bold">
+            <Badge
+              variant="outline"
+              className="px-4 py-1 rounded-full border-primary/30 text-primary font-bold"
+            >
               {id.includes("dashboard") ? "Analytics" : "Internal App"}
             </Badge>
           </motion.div>
@@ -78,7 +88,7 @@ export default function SingleProject({
 
         {/* Parallax Feature Image */}
         <div className="w-full aspect-video rounded-[2rem] overflow-hidden shadow-2xl relative border border-border/20 bg-secondary/20">
-          <motion.div 
+          <motion.div
             style={{ y, scale }}
             className="absolute inset-0 flex items-center justify-center"
           >
@@ -91,7 +101,7 @@ export default function SingleProject({
         </div>
 
         {/* Project Stats Banner */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -116,14 +126,18 @@ export default function SingleProject({
             <section className="space-y-8">
               <h2 className="text-3xl font-black font-heading flex items-center gap-4">
                 <Info className="text-primary h-8 w-8" />
-                {t("project.overview.title", "Project Overview")}
+                {String(t("project.overview.title", "Project Overview"))}
               </h2>
               <p className="text-xl text-muted-foreground leading-relaxed font-body">
-                {t(
-                  `projects.${id}.overview.desc`,
+                {String(
                   t(
-                    "project.overview.desc",
-                    "A comprehensive redesign of a high-traffic analytics platform, focusing on user experience, performance optimization, and modern aesthetic principles.",
+                    `projects.${id}.overview.desc`,
+                    String(
+                      t(
+                        "project.overview.desc",
+                        "A comprehensive redesign of a high-traffic analytics platform, focusing on user experience, performance optimization, and modern aesthetic principles.",
+                      ),
+                    ),
                   ),
                 )}
               </p>
@@ -133,11 +147,11 @@ export default function SingleProject({
             <section className="space-y-12">
               <h2 className="text-3xl font-black font-heading flex items-center gap-4">
                 <CheckCircle className="text-primary h-8 w-8" />
-                {t("project.features.title", "Key Features")}
+                {String(t("project.features.title", "Key Features"))}
               </h2>
               <div className="space-y-10">
                 {[1, 2, 3].map((f) => (
-                  <motion.div 
+                  <motion.div
                     key={f}
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -150,10 +164,17 @@ export default function SingleProject({
                     </div>
                     <div className="space-y-2">
                       <h3 className="font-black text-2xl text-foreground font-heading uppercase tracking-tight">
-                        {t(`project.features.${f}.title`, `Feature ${f}`)}
+                        {String(
+                          t(`project.features.${f}.title`, `Feature ${f}`),
+                        )}
                       </h3>
                       <p className="text-muted-foreground text-lg leading-relaxed font-body">
-                        {t(`project.features.${f}.desc`, "Integrated architecture for seamless user experience across all digital vertical touchpoints.")}
+                        {String(
+                          t(
+                            `project.features.${f}.desc`,
+                            "Integrated architecture for seamless user experience across all digital vertical touchpoints.",
+                          ),
+                        )}
                       </p>
                     </div>
                   </motion.div>
@@ -167,13 +188,13 @@ export default function SingleProject({
             <section className="space-y-8 bg-secondary/10 rounded-[2rem] p-8 border border-border/10">
               <h2 className="text-xl font-black font-heading flex items-center gap-3 uppercase tracking-widest text-primary">
                 <Terminal className="h-6 w-6" />
-                {t("project.tech.title", "Stack")}
+                {String(t("project.tech.title", "Stack"))}
               </h2>
               <div className="flex flex-wrap gap-2">
                 {["React", "Next.js", "Motion", "Tailwind"].map((tech) => (
-                  <Badge 
-                    key={tech} 
-                    variant="secondary" 
+                  <Badge
+                    key={tech}
+                    variant="secondary"
                     className="px-4 py-1.5 rounded-lg bg-background border border-border/50 font-bold text-xs"
                   >
                     {tech}
@@ -184,7 +205,14 @@ export default function SingleProject({
 
             <section className="p-8 border border-border/10 rounded-[2rem] space-y-6">
               <p className="text-muted-foreground italic font-body text-lg leading-relaxed">
-                &quot;{t("project.tech.quote", "Scaling this platform required a radical approach to state management.")}&quot;
+                &quot;
+                {String(
+                  t(
+                    "project.tech.quote",
+                    "Scaling this platform required a radical approach to state management.",
+                  ),
+                )}
+                &quot;
               </p>
             </section>
           </aside>
