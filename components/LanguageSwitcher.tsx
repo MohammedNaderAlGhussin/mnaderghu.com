@@ -50,13 +50,13 @@ export default function LanguageSwitcher() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => changeLocale("en")}>
-          {t("lang.en", "English")}
+          {String(t("lang.en", "English"))}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => changeLocale("de")}>
-          {t("lang.de", "Deutsch")}
+          {String(t("lang.de", "Deutsch"))}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => changeLocale("ar")}>
-          {t("lang.ar", "العربية")}
+          {String(t("lang.ar", "العربية"))}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
