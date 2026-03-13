@@ -13,7 +13,7 @@ import {
 import { i18nConfig } from "@/i18nConfig";
 
 export default function LanguageSwitcher() {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation("common");
   const currentLocale = i18n.language;
   const router = useRouter();
   const currentPathname = usePathname();
@@ -50,13 +50,13 @@ export default function LanguageSwitcher() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => changeLocale("en")}>
-          English (EN)
+          {t("lang.en", "English")}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => changeLocale("de")}>
-          Deutsch (DE)
+          {t("lang.de", "Deutsch")}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => changeLocale("ar")}>
-          العربية (AR)
+          {t("lang.ar", "العربية")}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
