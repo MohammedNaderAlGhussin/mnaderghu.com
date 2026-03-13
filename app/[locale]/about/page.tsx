@@ -5,165 +5,159 @@ import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { TextGenerateEffect } from "@/components/ui/aceternity/text-generate-effect";
 
 export default function About() {
   const { t } = useTranslation("common");
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-  };
+  const bioText = t(
+    "about.bio.text1",
+    "With over 8 years of experience in the design industry, I focus on creating intuitive user interfaces and robust front-end architectures. Passionate about minimalism, accessibility, and the intersection of visual art and performance code.",
+  );
 
   return (
-    <div className="container mx-auto px-4 lg:px-8 py-16 md:py-24">
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-        className="max-w-5xl mx-auto space-y-24"
-      >
+    <div className="container mx-auto px-4 lg:px-8 py-16 md:py-24 overflow-hidden">
+      <div className="max-w-6xl mx-auto space-y-32">
         {/* Split Hero & Bio */}
-        <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <motion.div variants={itemVariants}>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-8 leading-tight font-heading">
               {t("about.hero.title", "Creative Designer & Developer")}
             </h1>
+            <div className="h-1 w-20 bg-primary rounded-full mb-8" />
           </motion.div>
 
-          <motion.div variants={itemVariants} className="space-y-6">
-            <h2 className="text-2xl font-bold text-primary">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+            className="space-y-8"
+          >
+            <h2 className="text-2xl font-black text-primary uppercase tracking-widest font-heading">
               {t("about.bio.title", "Professional Bio")}
             </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              {t(
-                "about.bio.text1",
-                "With over 8 years of experience in the design industry, I focus on creating intuitive user interfaces and robust front-end architectures. Passionate about minimalism, accessibility, and the intersection of visual art and performance code.",
-              )}
-            </p>
+            <div className="text-xl text-muted-foreground leading-relaxed font-body">
+              <TextGenerateEffect words={bioText} />
+            </div>
           </motion.div>
         </section>
 
         {/* Experience Section */}
-        <section>
-          <motion.div variants={itemVariants} className="mb-10">
-            <h2 className="text-3xl font-bold flex items-center gap-3">
-              <span className="text-primary tracking-widest uppercase text-sm font-semibold mb-1 block">
-                {t("about.experience.label", "analytics")}
-              </span>
+        <section className="space-y-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-col md:flex-row md:items-end justify-between border-b border-border/10 pb-8"
+          >
+            <h2 className="text-3xl md:text-5xl font-black font-heading">
               {t("about.experience.title", "Work Experience")}
             </h2>
+            <span className="text-primary font-black uppercase tracking-[0.2em] text-sm mt-4 md:mt-0 font-body">
+              {t("about.experience.label", "The Journey")}
+            </span>
           </motion.div>
 
-          <motion.div variants={containerVariants} className="space-y-6">
-            <motion.div variants={itemVariants}>
-              <Card className="hover:shadow-md transition-shadow">
-                <CardHeader>
-                  <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
-                    <div>
-                      <CardTitle className="text-xl">
-                        {t("about.exp1.role", "Senior UI Designer")}
-                      </CardTitle>
-                      <p className="text-primary font-medium mt-1">
-                        {t(
-                          "about.exp1.company",
-                          "DesignFlow Studio • San Francisco",
-                        )}
-                      </p>
+          <div className="grid grid-cols-1 gap-8">
+            {[1, 2].map((i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: i * 0.1 }}
+              >
+                <Card className="bg-secondary/10 border-border/10 hover:border-primary/20 transition-all duration-500 hover:shadow-2xl rounded-3xl overflow-hidden group">
+                  <CardHeader className="p-8">
+                    <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-6">
+                      <div>
+                        <CardTitle className="text-2xl md:text-3xl font-black group-hover:text-primary transition-colors font-heading text-foreground">
+                          {t(`about.exp${i}.role`, i === 1 ? "Senior UI Designer" : "Product Developer")}
+                        </CardTitle>
+                        <p className="text-primary text-lg font-bold mt-2 font-body">
+                          {t(
+                            `about.exp${i}.company`,
+                            i === 1 ? "DesignFlow Studio" : "TechNova Systems"
+                          )}
+                        </p>
+                      </div>
+                      <Badge variant="secondary" className="w-fit px-6 py-2 bg-primary/10 text-primary border border-primary/20 font-black rounded-xl font-body">
+                        {t(`about.exp${i}.date`, i === 1 ? "2021 - Present" : "2018 - 2021")}
+                      </Badge>
                     </div>
-                    <Badge variant="secondary" className="w-fit">
-                      {t("about.exp1.date", "2021 - Present")}
-                    </Badge>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">
-                    {t(
-                      "about.exp1.desc",
-                      "Leading the design system initiative for Fortune 500 clients. Mentoring junior designers and collaborating with engineering teams to ensure pixel-perfect implementation of complex interactive features.",
-                    )}
-                  </p>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            <motion.div variants={itemVariants}>
-              <Card className="hover:shadow-md transition-shadow">
-                <CardHeader>
-                  <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
-                    <div>
-                      <CardTitle className="text-xl">
-                        {t("about.exp2.role", "Product Developer")}
-                      </CardTitle>
-                      <p className="text-primary font-medium mt-1">
-                        {t("about.exp2.company", "TechNova Systems • Remote")}
-                      </p>
-                    </div>
-                    <Badge variant="secondary" className="w-fit">
-                      {t("about.exp2.date", "2018 - 2021")}
-                    </Badge>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">
-                    {t(
-                      "about.exp2.desc",
-                      "Engineered responsive front-end components using React and Tailwind CSS. Reduced average page load time by 40% through code optimization and asset management strategies.",
-                    )}
-                  </p>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </motion.div>
+                  </CardHeader>
+                  <CardContent className="px-8 pb-8 pt-0">
+                    <p className="text-muted-foreground text-lg leading-relaxed font-body">
+                      {t(
+                        `about.exp${i}.desc`,
+                        i === 1 
+                          ? "Leading the design system initiative for Fortune 500 clients. Mentoring junior designers and collaborating with engineering teams to ensure pixel-perfect implementation of complex interactive features."
+                          : "Engineered responsive front-end components using React and Tailwind CSS. Reduced average page load time by 40% through code optimization and asset management strategies."
+                      )}
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
         </section>
 
         {/* Education Section */}
-        <section>
-          <motion.div variants={itemVariants} className="mb-10">
-            <h2 className="text-3xl font-bold flex items-center gap-3">
-              <span className="text-primary tracking-widest uppercase text-sm font-semibold mb-1 block">
-                {t("about.education.label", "school")}
-              </span>
+        <section className="space-y-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-col md:flex-row md:items-end justify-between border-b border-border/10 pb-8"
+          >
+            <h2 className="text-3xl md:text-5xl font-black font-heading">
               {t("about.education.title", "Education")}
             </h2>
+            <span className="text-primary font-black uppercase tracking-[0.2em] text-sm mt-4 md:mt-0 font-body">
+              {t("about.education.label", "Foundation")}
+            </span>
           </motion.div>
 
-          <motion.div variants={itemVariants}>
-            <Card className="hover:shadow-md transition-shadow">
-              <CardHeader>
-                <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <Card className="bg-primary/5 border-primary/10 hover:border-primary/30 transition-all duration-500 rounded-3xl p-2 group">
+              <div className="bg-card rounded-2xl p-8 transition-colors group-hover:bg-secondary/10">
+                <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-6 mb-8">
                   <div>
-                    <CardTitle className="text-xl">
+                    <CardTitle className="text-2xl md:text-3xl font-black font-heading text-foreground">
                       {t("about.edu.degree", "Master of Interaction Design")}
                     </CardTitle>
-                    <p className="text-primary font-medium mt-1">
+                    <p className="text-primary text-lg font-bold mt-2 font-body">
                       {t("about.edu.school", "Stanford University")}
                     </p>
                   </div>
-                  <Badge variant="secondary" className="w-fit">
+                  <Badge variant="secondary" className="w-fit px-6 py-2 bg-primary/10 text-primary border border-primary/20 font-black rounded-xl font-body">
                     {t("about.edu.date", "2016 - 2018")}
                   </Badge>
                 </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
+                <p className="text-muted-foreground text-lg leading-relaxed font-body">
                   {t(
                     "about.edu.desc",
                     "Specialized in Human-Computer Interaction and User Psychology. Graduated with honors.",
                   )}
                 </p>
-              </CardContent>
+              </div>
             </Card>
           </motion.div>
         </section>
-      </motion.div>
+      </div>
     </div>
   );
 }
