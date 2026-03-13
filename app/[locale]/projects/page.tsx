@@ -26,7 +26,10 @@ export default function Projects() {
   const projects = [
     {
       id: "ai-analytics-dashboard",
-      title: t("projects.ai-analytics-dashboard.title", "AI Analytics Dashboard"),
+      title: t(
+        "projects.ai-analytics-dashboard.title",
+        "AI Analytics Dashboard",
+      ),
       category: "Full-Stack",
       description: t(
         "projects.ai-analytics-dashboard.desc",
@@ -106,7 +109,8 @@ export default function Projects() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="text-4xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight font-heading tracking-tighter"
           >
-            {t("projects.hero.title", "My Projects")}<span className="text-primary">.</span>
+            {t("projects.hero.title", "My Projects")}
+            <span className="text-primary">.</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -137,7 +141,9 @@ export default function Projects() {
               onClick={() => setFilter(cat)}
               className={cn(
                 "rounded-full font-black px-8 h-12 transition-all active:scale-95 uppercase tracking-widest text-xs",
-                filter === cat ? "shadow-lg shadow-primary/20" : "border-border/50 text-muted-foreground"
+                filter === cat
+                  ? "shadow-lg shadow-primary/20"
+                  : "border-border/50 text-muted-foreground",
               )}
             >
               {t(`projects.cat.${cat.toLowerCase()}`, cat)}
@@ -147,8 +153,8 @@ export default function Projects() {
 
         {/* Grid with HoverEffect */}
         <section className="relative z-10">
-          <HoverEffect 
-            items={filteredProjects} 
+          <HoverEffect
+            items={filteredProjects}
             renderItem={(item) => (
               <Link href={item.link} className="block h-full group">
                 <Card className="h-full flex flex-col bg-card/60 backdrop-blur-md border-border/10 group-hover:border-primary/30 transition-all duration-500 overflow-hidden relative rounded-[2rem]">
@@ -159,14 +165,17 @@ export default function Projects() {
                     <div className="absolute inset-0 bg-linear-to-t from-background/90 via-transparent to-transparent z-10" />
                     <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity z-10" />
                   </div>
-                  
+
                   <CardHeader className="flex-1 relative z-20 -mt-16 mx-6 bg-card backdrop-blur-xl border border-border/10 rounded-[1.5rem] p-8 group-hover:border-primary/20 transition-all shadow-2xl">
                     <div className="flex justify-between items-start mb-6">
                       <Badge
                         variant="secondary"
                         className="bg-primary/10 text-primary border border-primary/20 font-black px-4 py-1 text-[10px] uppercase tracking-widest rounded-lg"
                       >
-                        {t(`projects.cat.${item.category.toLowerCase().replace("-", "")}`, item.category)}
+                        {t(
+                          `projects.cat.${item.category.toLowerCase().replace("-", "")}`,
+                          item.category,
+                        )}
                       </Badge>
                       <ExternalLink className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors hover:scale-125" />
                     </div>
