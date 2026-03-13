@@ -32,12 +32,12 @@ export function Navbar() {
   }, []);
 
   const links = [
-    { href: "/", label: t("nav.home", "Home") },
-    { href: "/about", label: t("nav.about", "About") },
-    { href: "/skills", label: t("nav.skills", "Skills") },
-    { href: "/projects", label: t("nav.projects", "Projects") },
-    { href: "/experience", label: t("nav.experience", "Experience") },
-    { href: "/contact", label: t("nav.contact", "Contact") },
+    { href: "/", label: String(t("nav.home", "Home")) },
+    { href: "/about", label: String(t("nav.about", "About")) },
+    { href: "/skills", label: String(t("nav.skills", "Skills")) },
+    { href: "/projects", label: String(t("nav.projects", "Projects")) },
+    { href: "/experience", label: String(t("nav.experience", "Experience")) },
+    { href: "/contact", label: String(t("nav.contact", "Contact")) },
   ];
 
   const getHref = (path: string) => {
@@ -77,7 +77,9 @@ export function Navbar() {
           <div className="bg-primary/10 p-2 rounded-lg group-hover:bg-primary/20 transition-colors">
             <Terminal className="h-6 w-6 text-primary" />
           </div>
-          <span className="font-bold text-xl tracking-tight">{t("home.title", "Nader")}</span>
+          <span className="font-bold text-xl tracking-tight">
+            {String(t("home.title", "Nader"))}
+          </span>
         </Link>
 
         {/* Desktop Links */}
@@ -117,19 +119,25 @@ export function Navbar() {
           <Sheet>
             <SheetTrigger className="hover:bg-accent hover:text-accent-foreground h-9 w-9 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0">
               <Menu className="h-6 w-6" />
-              <span className="sr-only">{t("nav.toggle", "Toggle Menu")}</span>
+              <span className="sr-only">
+                {String(t("nav.toggle", "Toggle Menu"))}
+              </span>
             </SheetTrigger>
             <SheetContent
               side={i18n.language === "ar" ? "right" : "left"}
               className="flex flex-col"
             >
-              <SheetTitle className="sr-only">{t("nav.menu.title", "Navigation Menu")}</SheetTitle>
+              <SheetTitle className="sr-only">
+                {String(t("nav.menu.title", "Navigation Menu"))}
+              </SheetTitle>
               <SheetDescription className="sr-only">
-                {t("nav.menu.desc", "Links to navigate the portfolio")}
+                {String(t("nav.menu.desc", "Links to navigate the portfolio"))}
               </SheetDescription>
               <div className="flex items-center space-x-2 rtl:space-x-reverse mt-6 mb-8">
                 <Terminal className="h-6 w-6 text-primary" />
-                <span className="font-bold text-lg tracking-tight">{t("home.title", "Nader")}</span>
+                <span className="font-bold text-lg tracking-tight">
+                  {String(t("home.title", "Nader"))}
+                </span>
               </div>
               <div className="flex flex-col space-y-4">
                 {links.map((link) => (
