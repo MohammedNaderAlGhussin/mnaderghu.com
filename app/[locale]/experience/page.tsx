@@ -24,28 +24,40 @@ export default function Experience() {
 
   const timeline = [
     {
-      role: "Senior UI Designer",
-      company: "DesignFlow Studio",
-      date: "2021 - Present",
-      desc: "Leading the design system initiative for Fortune 500 clients. Specialized in rapid prototyping and high-fidelity mockups.",
+      role: t("experience.1.role", "Senior UI Designer"),
+      company: t("experience.1.company", "DesignFlow Studio"),
+      date: t("experience.1.date", "2021 - Present"),
+      desc: t(
+        "experience.1.desc",
+        "Leading the design system initiative for Fortune 500 clients. Specialized in rapid prototyping and high-fidelity mockups.",
+      ),
     },
     {
-      role: "Product Developer",
-      company: "TechNova Systems",
-      date: "2018 - 2021",
-      desc: "Engineered responsive front-end components using React and Tailwind CSS. Reduced average page load time by 40%.",
+      role: t("experience.2.role", "Product Developer"),
+      company: t("experience.2.company", "TechNova Systems"),
+      date: t("experience.2.date", "2018 - 2021"),
+      desc: t(
+        "experience.2.desc",
+        "Engineered responsive front-end components using React and Tailwind CSS. Reduced average page load time by 40%.",
+      ),
     },
     {
-      role: "Frontend Engineer",
-      company: "WebSphere Solutions",
-      date: "2015 - 2018",
-      desc: "Built progressive web applications and optimized legacy monolithic dashboards into React SPAs.",
+      role: t("experience.3.role", "Frontend Engineer"),
+      company: t("experience.3.company", "WebSphere Solutions"),
+      date: t("experience.3.date", "2015 - 2018"),
+      desc: t(
+        "experience.3.desc",
+        "Built progressive web applications and optimized legacy monolithic dashboards into React SPAs.",
+      ),
     },
     {
-      role: "Junior Web Developer",
-      company: "Digital Horizon",
-      date: "2013 - 2015",
-      desc: "Maintained enterprise CMS installations and custom WordPress plugin development.",
+      role: t("experience.4.role", "Junior Web Developer"),
+      company: t("experience.4.company", "Digital Horizon"),
+      date: t("experience.4.date", "2013 - 2015"),
+      desc: t(
+        "experience.4.desc",
+        "Maintained enterprise CMS installations and custom WordPress plugin development.",
+      ),
     },
   ];
 
