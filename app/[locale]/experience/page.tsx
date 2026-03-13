@@ -3,24 +3,12 @@
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 export default function Experience() {
-  const { t } = useTranslation("common");
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15 },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, scale: 0.95, y: 20 },
-    visible: { opacity: 1, scale: 1, y: 0 },
-  };
+  const { t, i18n } = useTranslation("common");
+  const isRtl = i18n.language === "ar";
 
   const timeline = [
     {
@@ -62,23 +50,24 @@ export default function Experience() {
   ];
 
   return (
-    <div className="container mx-auto px-4 lg:px-8 py-16 md:py-24 overflow-hidden">
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-        className="max-w-6xl mx-auto"
-      >
-        <section className="text-center mb-16 md:mb-24">
+    <div className="container mx-auto px-4 lg:px-8 py-16 md:py-24 overflow-hidden relative">
+      <div className="max-w-6xl mx-auto">
+        <section className="text-center mb-16 md:mb-32">
           <motion.h1
-            variants={itemVariants}
-            className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="text-4xl md:text-7xl font-black mb-6 leading-tight font-heading"
           >
             {t("experience.title", "Experience")}
           </motion.h1>
           <motion.p
-            variants={itemVariants}
-            className="text-lg md:text-xl text-muted-foreground mx-auto max-w-2xl"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            className="text-lg md:text-2xl text-muted-foreground mx-auto max-w-3xl font-body"
           >
             {t(
               "experience.desc",
@@ -90,61 +79,74 @@ export default function Experience() {
         {/* Timeline */}
         <div className="relative border-l-2 md:border-l-0 md:mx-auto md:w-full max-w-5xl border-primary/20 rtl:border-r-2 rtl:border-l-0">
           {/* Middle Line */}
-          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-primary/20 -translate-x-1/2 rtl:translate-x-1/2" />
+          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-linear-to-b from-primary/30 via-primary/10 to-transparent -translate-x-1/2 rtl:translate-x-1/2" />
 
           {timeline.map((item, index) => {
-            const isEven = index % 2 === 0;
+            const isLeft = index % 2 === 0;
             return (
-              <motion.div
+              <div
                 key={index}
-                variants={itemVariants}
-                className={`relative flex flex-col md:flex-row justify-between items-center w-full mb-12 lg:mb-16 
-                  ${isEven ? "md:flex-row-reverse" : ""}`}
+                className={`relative flex flex-col md:flex-row justify-between items-center w-full mb-16 lg:mb-24
+                  ${isLeft ? "md:flex-row-reverse" : ""}`}
               >
-                {/* Timeline Dot */}
-                <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 rtl:translate-x-1/2 w-8 h-8 rounded-full bg-background border-4 border-primary z-10 items-center justify-center shadow-[0_0_15px_rgba(0,194,255,0.4)]">
-                  <div className="w-2 h-2 rounded-full bg-primary" />
+                {/* Timeline Dot with Pulse */}
+                <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 rtl:translate-x-1/2 w-10 h-10 rounded-full bg-background border-4 border-primary z-10 items-center justify-center">
+                  <motion.div 
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="w-3 h-3 rounded-full bg-primary shadow-[0_0_20px_rgba(0,194,255,1)]" 
+                  />
+                  <div className="absolute inset-0 rounded-full border-4 border-primary/30 animate-ping" />
                 </div>
 
                 {/* Placeholder for center alignment */}
-                <div className="hidden md:block w-5/12" />
+                <div className="hidden md:block w-[45%]" />
 
-                {/* Content Card */}
-                <div className="w-full md:w-5/12 pl-6 md:pl-0 rtl:pr-6 rtl:md:pr-0 rtl:pl-0">
+                {/* Content Card with Scroll Animation */}
+                <motion.div 
+                  initial={{ opacity: 0, x: isLeft ? (isRtl ? -80 : 80) : (isRtl ? 80 : -80) }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  className="w-full md:w-[45%] pl-8 md:pl-0 rtl:pr-8 rtl:md:pr-0 rtl:pl-0"
+                >
                   <Card
-                    className={`relative bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/50 transition-all hover:shadow-lg
-                    ${!isEven ? "md:text-left rtl:md:text-right md:mr-6 rtl:md:mr-0 rtl:md:ml-6" : "md:text-right rtl:md:text-left md:ml-6 rtl:md:ml-0 rtl:md:mr-6"}
+                    className={`relative bg-card/40 backdrop-blur-xl border-border/10 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl group rounded-3xl p-1
+                    ${!isLeft ? "md:text-left rtl:md:text-right" : "md:text-right rtl:md:text-left"}
                   `}
                   >
-                    {/* Mobile Dot */}
-                    <div className="absolute top-6 -left-[28px] rtl:left-auto rtl:-right-[28px] md:hidden w-4 h-4 rounded-full bg-primary shadow-[0_0_10px_rgba(0,194,255,0.5)] border-2 border-background" />
+                    <div className="p-6">
+                      {/* Mobile Dot */}
+                      <div className="absolute top-10 -left-[35px] rtl:left-auto rtl:-right-[35px] md:hidden w-5 h-5 rounded-full bg-primary shadow-[0_0_15px_rgba(0,194,255,0.6)] border-4 border-background" />
 
-                    <CardHeader className="pb-3 border-b border-border/30">
-                      <Badge
-                        variant="outline"
-                        className={`w-fit bg-background text-primary tracking-widest uppercase mb-3 ${!isEven ? "mr-auto rtl:ml-auto rtl:mr-0" : "ml-auto rtl:mr-auto rtl:ml-0 md:mr-0 rtl:md:ml-0"}`}
-                      >
-                        {item.date}
-                      </Badge>
-                      <CardTitle className="text-2xl font-bold">
-                        {item.role}
-                      </CardTitle>
-                      <p className="text-lg font-semibold text-primary">
-                        {item.company}
-                      </p>
-                    </CardHeader>
-                    <CardContent className="pt-4">
-                      <p className="text-muted-foreground leading-relaxed">
-                        {item.desc}
-                      </p>
-                    </CardContent>
+                      <div className={`flex flex-col mb-4 ${!isLeft ? "items-start" : "items-end"}`}>
+                        <Badge
+                          variant="secondary"
+                          className="bg-primary/10 text-primary border border-primary/20 font-black uppercase tracking-widest px-4 py-1 mb-4"
+                        >
+                          {item.date}
+                        </Badge>
+                        <h3 className="text-2xl md:text-3xl font-black group-hover:text-primary transition-colors font-heading">
+                          {item.role}
+                        </h3>
+                        <p className="text-xl font-bold text-primary/80 font-body">
+                          {item.company}
+                        </p>
+                      </div>
+                      
+                      <div className="pt-4 border-t border-border/10">
+                        <p className="text-muted-foreground leading-relaxed text-lg font-body">
+                          {item.desc}
+                        </p>
+                      </div>
+                    </div>
                   </Card>
-                </div>
-              </motion.div>
+                </motion.div>
+              </div>
             );
           })}
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }
