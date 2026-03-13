@@ -79,7 +79,7 @@ export default function About() {
                       </p>
                     </div>
                     <Badge variant="secondary" className="w-fit">
-                      2021 - Present
+                      {t("about.exp1.date", "2021 - Present")}
                     </Badge>
                   </div>
                 </CardHeader>
@@ -107,7 +107,7 @@ export default function About() {
                       </p>
                     </div>
                     <Badge variant="secondary" className="w-fit">
-                      2018 - 2021
+                      {t("about.exp2.date", "2018 - 2021")}
                     </Badge>
                   </div>
                 </CardHeader>
@@ -148,7 +148,7 @@ export default function About() {
                     </p>
                   </div>
                   <Badge variant="secondary" className="w-fit">
-                    2016 - 2018
+                    {t("about.edu.date", "2016 - 2018")}
                   </Badge>
                 </div>
               </CardHeader>
