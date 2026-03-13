@@ -18,26 +18,30 @@ export default function Skills() {
 
   const skills = [
     {
-      title: t("skills.frontend.title", "Frontend Development"),
-      desc: t("skills.frontend.desc", "Crafting immersive user interfaces"),
+      title: String(t("skills.frontend.title", "Frontend Development")),
+      desc: String(
+        t("skills.frontend.desc", "Crafting immersive user interfaces"),
+      ),
       icon: <LayoutTemplate className="w-8 h-8 text-primary" />,
       tags: ["React", "Next.js", "Tailwind CSS", "Framer Motion", "TypeScript"],
     },
     {
-      title: t("skills.backend.title", "Backend & Logic"),
-      desc: t("skills.backend.desc", "Scalable systems and robust APIs"),
+      title: String(t("skills.backend.title", "Backend & Logic")),
+      desc: String(
+        t("skills.backend.desc", "Scalable systems and robust APIs"),
+      ),
       icon: <Server className="w-8 h-8 text-primary" />,
       tags: ["Node.js", "Express", "Python", "Go", "GraphQL"],
     },
     {
-      title: t("skills.database.title", "Database"),
-      desc: t("skills.database.desc", "Secure and structured data"),
+      title: String(t("skills.database.title", "Database")),
+      desc: String(t("skills.database.desc", "Secure and structured data")),
       icon: <Database className="w-8 h-8 text-primary" />,
       tags: ["PostgreSQL", "MongoDB", "Redis", "Supabase", "Prisma"],
     },
     {
-      title: t("skills.devops.title", "DevOps"),
-      desc: t("skills.devops.desc", "Deployment and infrastructure"),
+      title: String(t("skills.devops.title", "DevOps")),
+      desc: String(t("skills.devops.desc", "Deployment and infrastructure")),
       icon: <Settings className="w-8 h-8 text-primary" />,
       tags: ["Docker", "AWS", "Vercel", "CI/CD", "Linux"],
     },
@@ -45,31 +49,39 @@ export default function Skills() {
 
   const approaches = [
     {
-      title: t("skills.approach.1.title", "Understand First"),
-      desc: t(
-        "skills.approach.1.desc",
-        "I dive deep into the problem domain to ensure every line of code serves a business goal.",
+      title: String(t("skills.approach.1.title", "Understand First")),
+      desc: String(
+        t(
+          "skills.approach.1.desc",
+          "I dive deep into the problem domain to ensure every line of code serves a business goal.",
+        ),
       ),
     },
     {
-      title: t("skills.approach.2.title", "Architecture Matters"),
-      desc: t(
-        "skills.approach.2.desc",
-        "Scalable, maintainable, and clean architecture is the foundation of every project I build.",
+      title: String(t("skills.approach.2.title", "Architecture Matters")),
+      desc: String(
+        t(
+          "skills.approach.2.desc",
+          "Scalable, maintainable, and clean architecture is the foundation of every project I build.",
+        ),
       ),
     },
     {
-      title: t("skills.approach.3.title", "Iterative by Nature"),
-      desc: t(
-        "skills.approach.3.desc",
-        "Continuous feedback loops and rapid prototyping ensure the final product hits the mark.",
+      title: String(t("skills.approach.3.title", "Iterative by Nature")),
+      desc: String(
+        t(
+          "skills.approach.3.desc",
+          "Continuous feedback loops and rapid prototyping ensure the final product hits the mark.",
+        ),
       ),
     },
     {
-      title: t("skills.approach.4.title", "Collaboration"),
-      desc: t(
-        "skills.approach.4.desc",
-        "I work best as part of a team, sharing knowledge and bridging silos between departments.",
+      title: String(t("skills.approach.4.title", "Collaboration")),
+      desc: String(
+        t(
+          "skills.approach.4.desc",
+          "I work best as part of a team, sharing knowledge and bridging silos between departments.",
+        ),
       ),
     },
   ];
@@ -86,7 +98,8 @@ export default function Skills() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="text-4xl md:text-7xl lg:text-8xl font-black mb-8 leading-tight font-heading tracking-tighter"
           >
-            {t("skills.hero.title", "Expertise")}<span className="text-primary">.</span>
+            {String(t("skills.hero.title", "Expertise"))}
+            <span className="text-primary">.</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -95,9 +108,11 @@ export default function Skills() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="text-xl md:text-2xl text-muted-foreground leading-relaxed font-body"
           >
-            {t(
-              "skills.hero.desc",
-              "Designing and developing robust digital experiences with a modern tech stack. I bridge the gap between complex engineering and human-centered design.",
+            {String(
+              t(
+                "skills.hero.desc",
+                "Designing and developing robust digital experiences with a modern tech stack. I bridge the gap between complex engineering and human-centered design.",
+              ),
             )}
           </motion.p>
         </section>
@@ -106,7 +121,7 @@ export default function Skills() {
         <section>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {skills.map((skill, index) => (
-              <motion.div 
+              <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -145,14 +160,15 @@ export default function Skills() {
 
         {/* Approach Section */}
         <section className="space-y-20">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-center md:text-left rtl:md:text-right"
           >
             <h2 className="text-3xl md:text-6xl font-black font-heading tracking-tighter uppercase">
-              {t("skills.how.title", "Philosophies")}<span className="text-primary">.</span>
+              {String(t("skills.how.title", "Philosophies"))}
+              <span className="text-primary">.</span>
             </h2>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -192,13 +208,15 @@ export default function Skills() {
           className="py-32 border-t border-border/10 text-center"
         >
           <h2 className="text-4xl md:text-8xl font-black mb-12 max-w-5xl mx-auto leading-[1.1] font-heading tracking-tighter">
-            {t("skills.cta.title", "Let's build something exceptional.")}
+            {String(
+              t("skills.cta.title", "Let's build something exceptional."),
+            )}
           </h2>
           <Link
             href={`/${i18n.language}/contact`}
             className="inline-flex h-20 items-center justify-center rounded-2xl bg-primary px-16 text-xl font-black text-primary-foreground shadow-2xl transition-all hover:bg-primary/90 hover:scale-110 active:scale-95 uppercase tracking-widest"
           >
-            {t("skills.cta.btn", "Start a Project")}
+            {String(t("skills.cta.btn", "Start a Project"))}
             <ArrowRight className="ml-4 h-6 w-6 rtl:rotate-180" />
           </Link>
         </motion.section>
