@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Inter, Cairo, Outfit } from "next/font/google";
+import { Sora, Inter, Cairo } from "next/font/google";
 import "../globals.css";
 import { dir } from "i18next";
 import { i18nConfig } from "@/i18nConfig";
@@ -8,9 +8,11 @@ import TranslationsProvider from "@/components/TranslationsProvider";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { PageTransition } from "@/components/PageTransition";
+import { BackgroundGradientAccent } from "@/components/BackgroundGradientAccent";
 
-const geist = Geist({
-  variable: "--font-geist",
+const sora = Sora({
+  variable: "--font-sora",
   subsets: ["latin"],
 });
 
@@ -48,7 +50,7 @@ export default async function RootLayout(props: {
   return (
     <html lang={locale} dir={dir(locale)} suppressHydrationWarning>
       <body
-        className={`${geist.variable} ${inter.variable} ${cairo.variable} font-body antialiased min-h-screen bg-background text-foreground`}
+        className={`${sora.variable} ${inter.variable} ${cairo.variable} font-body antialiased min-h-screen bg-background text-foreground relative overflow-x-hidden`}
         suppressHydrationWarning
       >
         <ThemeProvider
@@ -62,8 +64,18 @@ export default async function RootLayout(props: {
             resources={resources}
           >
             <div className="flex min-h-screen flex-col">
+              <BackgroundGradientAccent
+                position="top-left"
+                className="opacity-40"
+              />
+              <BackgroundGradientAccent
+                position="bottom-right"
+                className="opacity-20"
+              />
               <Navbar />
-              <main className="flex-1">{props.children}</main>
+              <main className="flex-1 relative z-10">
+                <PageTransition>{props.children}</PageTransition>
+              </main>
               <Footer />
             </div>
           </TranslationsProvider>
