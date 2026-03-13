@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Projects() {
   const { t, i18n } = useTranslation("common");
-  const [filter, setFilter] = React.useState("All");
+  const [filter, setFilter] = React.useState(t("projects.cat.all", "All"));
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -32,49 +32,73 @@ export default function Projects() {
     visible: { opacity: 1, y: 0 },
   };
 
-  const categories = ["All", "Frontend", "Backend", "Full-Stack", "UI Design"];
+  const categories = [
+    t("projects.cat.all", "All"),
+    t("projects.cat.frontend", "Frontend"),
+    t("projects.cat.backend", "Backend"),
+    t("projects.cat.fullstack", "Full-Stack"),
+    t("projects.cat.ui", "UI Design"),
+  ];
 
   const projects = [
     {
       id: "ai-analytics-dashboard",
-      title: "AI Analytics Dashboard",
-      category: "Full-Stack",
-      desc: "A real-time predictive analytics dashboard for SaaS platforms using OpenAI APIs and dynamic data streaming.",
+      title: t("projects.ai-analytics-dashboard.title", "AI Analytics Dashboard"),
+      category: t("projects.cat.fullstack", "Full-Stack"),
+      desc: t(
+        "projects.ai-analytics-dashboard.desc",
+        "A real-time predictive analytics dashboard for SaaS platforms using OpenAI APIs and dynamic data streaming.",
+      ),
       tech: ["React", "Next.js", "Redux", "Tailwind"],
     },
     {
       id: "ecommerce-engine",
-      title: "E-commerce Engine",
-      category: "Full-Stack",
-      desc: "High-performance storefront with headless CMS integration, global state management, and Stripe payments.",
+      title: t("projects.ecommerce-engine.title", "E-commerce Engine"),
+      category: t("projects.cat.fullstack", "Full-Stack"),
+      desc: t(
+        "projects.ecommerce-engine.desc",
+        "High-performance storefront with headless CMS integration, global state management, and Stripe payments.",
+      ),
       tech: ["Next.js", "Stripe", "Sanity", "Zustand"],
     },
     {
       id: "web3-wallet",
-      title: "Web3 Wallet Tracker",
-      category: "Frontend",
-      desc: "Multi-chain portfolio visualizer with live pricing, transaction history, and NFT gallery integration.",
+      title: t("projects.web3-wallet.title", "Web3 Wallet Tracker"),
+      category: t("projects.cat.frontend", "Frontend"),
+      desc: t(
+        "projects.web3-wallet.desc",
+        "Multi-chain portfolio visualizer with live pricing, transaction history, and NFT gallery integration.",
+      ),
       tech: ["Ethers.js", "React", "Tailwind", "Wagmi"],
     },
     {
       id: "sentinel-security",
-      title: "Sentinel Security",
-      category: "Backend",
-      desc: "Infrastructure monitoring tool for cloud deployments with automated threat detection and alert systems.",
+      title: t("projects.sentinel-security.title", "Sentinel Security"),
+      category: t("projects.cat.backend", "Backend"),
+      desc: t(
+        "projects.sentinel-security.desc",
+        "Infrastructure monitoring tool for cloud deployments with automated threat detection and alert systems.",
+      ),
       tech: ["Python", "Docker", "AWS", "PostgreSQL"],
     },
     {
       id: "healthsync-pro",
-      title: "HealthSync Pro",
-      category: "UI Design",
-      desc: "A cross-platform health application integrating wearable data for holistic lifestyle coaching.",
+      title: t("projects.healthsync-pro.title", "HealthSync Pro"),
+      category: t("projects.cat.ui", "UI Design"),
+      desc: t(
+        "projects.healthsync-pro.desc",
+        "A cross-platform health application integrating wearable data for holistic lifestyle coaching.",
+      ),
       tech: ["Figma", "React Native"],
     },
     {
       id: "nexus-editor",
-      title: "Nexus Code Editor",
-      category: "Frontend",
-      desc: "Lightweight browser-based IDE with collaborative editing features and real-time compilation.",
+      title: t("projects.nexus-editor.title", "Nexus Code Editor"),
+      category: t("projects.cat.frontend", "Frontend"),
+      desc: t(
+        "projects.nexus-editor.desc",
+        "Lightweight browser-based IDE with collaborative editing features and real-time compilation.",
+      ),
       tech: ["Monaco", "WebSockets", "React"],
     },
   ];
