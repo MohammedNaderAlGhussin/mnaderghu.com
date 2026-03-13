@@ -13,9 +13,9 @@ export default function Home() {
   const { t, i18n } = useTranslation("common");
 
   const roles = [
-    t("home.role.frontend", "Front-End Engineer"),
-    t("home.role.fullstack", "Full-Stack Developer"),
-    t("home.role.software", "Software Engineer"),
+    String(t("home.role.frontend", "Front-End Engineer")),
+    String(t("home.role.fullstack", "Full-Stack Developer")),
+    String(t("home.role.software", "Software Engineer")),
   ];
 
   return (
@@ -33,7 +33,7 @@ export default function Home() {
           >
             <div className="mb-4">
               <TextGenerateEffect
-                words={t("home.title", "Nader")}
+                words={String(t("home.title", "Nader"))}
                 className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-black tracking-tighter text-foreground mb-4 font-heading"
               />
             </div>
@@ -52,9 +52,11 @@ export default function Home() {
               transition={{ delay: 0.4, duration: 0.6 }}
               className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-2xl leading-relaxed font-body"
             >
-              {t(
-                "home.heroText",
-                "Crafting robust digital experiences with modern web technologies. From scalable architectures to pixel-perfect interfaces.",
+              {String(
+                t(
+                  "home.heroText",
+                  "Crafting robust digital experiences with modern web technologies. From scalable architectures to pixel-perfect interfaces.",
+                ),
               )}
             </motion.p>
 
@@ -69,14 +71,14 @@ export default function Home() {
                 href={`/${i18n.language}/projects`}
                 className="inline-flex h-12 md:h-14 items-center justify-center rounded-full bg-primary px-10 text-sm md:text-base font-bold text-primary-foreground shadow-lg transition-all hover:bg-primary/90 hover:scale-105"
               >
-                {t("home.cta.projects", "View Projects")}
+                {String(t("home.cta.projects", "View Projects"))}
                 <ArrowRight className="ml-2 h-4 w-4 rtl:rotate-180 rtl:ml-0 rtl:mr-2" />
               </Link>
               <Link
                 href={`/${i18n.language}/contact`}
                 className="inline-flex h-12 md:h-14 items-center justify-center rounded-full border border-primary/20 bg-background/50 backdrop-blur-sm px-10 text-sm md:text-base font-bold shadow-sm transition-all hover:bg-secondary hover:text-foreground hover:scale-105"
               >
-                {t("home.cta.contact", "Get in Touch")}
+                {String(t("home.cta.contact", "Get in Touch"))}
               </Link>
             </motion.div>
           </motion.div>
@@ -95,10 +97,10 @@ export default function Home() {
               className="space-y-2 group"
             >
               <div className="text-5xl md:text-6xl font-black text-primary group-hover:scale-110 transition-transform duration-300">
-                {t("home.stats.experience.val", "5+")}
+                {String(t("home.stats.experience.val", "5+"))}
               </div>
               <div className="text-sm md:text-base font-bold text-muted-foreground uppercase tracking-widest">
-                {t("home.stats.experience", "Years of Experience")}
+                {String(t("home.stats.experience", "Years of Experience"))}
               </div>
             </motion.div>
 
@@ -110,10 +112,10 @@ export default function Home() {
               className="space-y-2 group"
             >
               <div className="text-5xl md:text-6xl font-black text-primary group-hover:scale-110 transition-transform duration-300">
-                {t("home.stats.projects.val", "40+")}
+                {String(t("home.stats.projects.val", "40+"))}
               </div>
               <div className="text-sm md:text-base font-bold text-muted-foreground uppercase tracking-widest">
-                {t("home.stats.projects", "Projects Built")}
+                {String(t("home.stats.projects", "Projects Built"))}
               </div>
             </motion.div>
 
@@ -125,10 +127,10 @@ export default function Home() {
               className="space-y-2 group"
             >
               <div className="text-5xl md:text-6xl font-black text-primary group-hover:scale-110 transition-transform duration-300">
-                {t("home.stats.clients.val", "25+")}
+                {String(t("home.stats.clients.val", "25+"))}
               </div>
               <div className="text-sm md:text-base font-bold text-muted-foreground uppercase tracking-widest">
-                {t("home.stats.clients", "Happy Clients")}
+                {String(t("home.stats.clients", "Happy Clients"))}
               </div>
             </motion.div>
           </div>
