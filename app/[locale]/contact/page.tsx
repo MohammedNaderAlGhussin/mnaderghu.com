@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -58,15 +58,19 @@ export default function Contact() {
     setTimeout(() => setIsSuccess(false), 5000);
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
   };
 
   return (
     <div className="min-h-screen relative overflow-hidden">
       <DotBackground className="opacity-30" />
-      
+
       <div className="container mx-auto px-4 lg:px-8 py-16 md:py-32 relative z-10">
         <motion.div
           initial="hidden"
@@ -76,13 +80,14 @@ export default function Contact() {
           className="max-w-7xl mx-auto space-y-24"
         >
           <section className="text-center space-y-8">
-            <motion.h1 
+            <motion.h1
               variants={itemVariants}
               className="text-4xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight font-heading tracking-tighter"
             >
-              {t("contact.title", "Let's Talk")}<span className="text-primary">.</span>
+              {t("contact.title", "Let's Talk")}
+              <span className="text-primary">.</span>
             </motion.h1>
-            <motion.p 
+            <motion.p
               variants={itemVariants}
               className="text-xl md:text-2xl text-muted-foreground mx-auto max-w-3xl leading-relaxed font-body"
             >
@@ -96,7 +101,7 @@ export default function Contact() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-start">
             {/* Info Column */}
             <section className="space-y-12 order-2 lg:order-1">
-              <motion.h2 
+              <motion.h2
                 variants={itemVariants}
                 className="text-2xl font-black uppercase tracking-[0.2em] text-primary font-heading"
               >
@@ -106,9 +111,9 @@ export default function Contact() {
               <div className="space-y-12">
                 {[
                   { icon: MapPin, label: "Location", val: "Gaza, Palestine" },
-                  { icon: Mail, label: "Email", val: "hello@mohammed.dev" }
+                  { icon: Mail, label: "Email", val: "hello@mohammed.dev" },
                 ].map((item, i) => (
-                  <motion.div 
+                  <motion.div
                     key={i}
                     variants={itemVariants}
                     className="flex items-start gap-6 group"
@@ -118,9 +123,14 @@ export default function Contact() {
                     </div>
                     <div>
                       <h3 className="text-xs font-black text-muted-foreground uppercase tracking-widest mb-1">
-                        {t(`contact.info.${item.label.toLowerCase()}`, item.label)}
+                        {t(
+                          `contact.info.${item.label.toLowerCase()}`,
+                          item.label,
+                        )}
                       </h3>
-                      <p className="text-xl md:text-2xl font-bold font-body">{item.val}</p>
+                      <p className="text-xl md:text-2xl font-bold font-body">
+                        {item.val}
+                      </p>
                     </div>
                   </motion.div>
                 ))}
@@ -164,7 +174,7 @@ export default function Contact() {
                   <div className="absolute top-0 right-0 p-8 text-primary overflow-hidden opacity-10 pointer-events-none">
                     <Send className="h-40 w-40 -rotate-12 translate-x-10 -translate-y-10" />
                   </div>
-                  
+
                   <CardContent className="p-0">
                     <form
                       onSubmit={form.handleSubmit(onSubmit)}
@@ -180,7 +190,9 @@ export default function Contact() {
                           {...form.register("name")}
                         />
                         {form.formState.errors.name && (
-                          <p className="text-sm text-destructive font-bold">{form.formState.errors.name.message}</p>
+                          <p className="text-sm text-destructive font-bold">
+                            {form.formState.errors.name.message}
+                          </p>
                         )}
                       </div>
 
@@ -195,7 +207,9 @@ export default function Contact() {
                           {...form.register("email")}
                         />
                         {form.formState.errors.email && (
-                          <p className="text-sm text-destructive font-bold">{form.formState.errors.email.message}</p>
+                          <p className="text-sm text-destructive font-bold">
+                            {form.formState.errors.email.message}
+                          </p>
                         )}
                       </div>
 
@@ -209,7 +223,9 @@ export default function Contact() {
                           {...form.register("message")}
                         />
                         {form.formState.errors.message && (
-                          <p className="text-sm text-destructive font-bold">{form.formState.errors.message.message}</p>
+                          <p className="text-sm text-destructive font-bold">
+                            {form.formState.errors.message.message}
+                          </p>
                         )}
                       </div>
 
