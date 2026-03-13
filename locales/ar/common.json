@@ -1,6 +1,8 @@
 {
   "home.title": "نادر",
-  "home.role": "مهندس تطوير شامل",
+  "home.role.frontend": "مهندس تطوير واجهات",
+  "home.role.fullstack": "مهندس تطوير شامل",
+  "home.role.software": "مهندس برمجيات",
   "home.heroText": "أصنع تجارب رقمية قوية باستخدام أحدث تقنيات الويب، من البنى التحتية القابلة للتوسع إلى الواجهات المثالية والمنسقة.",
   "home.cta.projects": "تصفح المشاريع",
   "home.cta.contact": "تواصل معي",
@@ -76,7 +78,7 @@
   "projects.cat.frontend": "واجهات أمامية",
   "projects.cat.backend": "واجهات خلفية",
   "projects.cat.fullstack": "تطوير شامل",
-  "projects.cat.ui": "تصميم واجهات",
+  "projects.cat.uidesign": "تصميم واجهات",
   "projects.ai-analytics-dashboard.title": "لوحة تحكم تحليلات الذكاء الاصطناعي",
   "projects.ai-analytics-dashboard.desc": "لوحة تحكم للتحليلات التنبؤية بالوقت الفعلي لمنصات SaaS باستخدام واجهات برمجة تطبيقات OpenAI وبث البيانات الديناميكي.",
   "projects.ecommerce-engine.title": "محرك التجارة الإلكترونية",

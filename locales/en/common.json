@@ -1,6 +1,8 @@
 {
   "home.title": "Nader",
-  "home.role": "Full-Stack Engineer",
+  "home.role.frontend": "Front-End Engineer",
+  "home.role.fullstack": "Full-Stack Developer",
+  "home.role.software": "Software Engineer",
   "home.heroText": "Crafting robust digital experiences with modern web technologies. From scalable architectures to pixel-perfect interfaces.",
   "home.cta.projects": "View Projects",
   "home.cta.contact": "Get in Touch",
@@ -76,7 +78,7 @@
   "projects.cat.frontend": "Frontend",
   "projects.cat.backend": "Backend",
   "projects.cat.fullstack": "Full-Stack",
-  "projects.cat.ui": "UI Design",
+  "projects.cat.uidesign": "UI Design",
   "projects.ai-analytics-dashboard.title": "AI Analytics Dashboard",
   "projects.ai-analytics-dashboard.desc": "A real-time predictive analytics dashboard for SaaS platforms using OpenAI APIs and dynamic data streaming.",
   "projects.ecommerce-engine.title": "E-commerce Engine",

@@ -1,6 +1,8 @@
 {
   "home.title": "Nader",
-  "home.role": "Full-Stack Entwickler",
+  "home.role.frontend": "Frontend-Ingenieur",
+  "home.role.fullstack": "Full-Stack-Entwickler",
+  "home.role.software": "Software-Ingenieur",
   "home.heroText": "Erstellung robuster digitaler Erlebnisse mit modernen Web-Technologien. Von skalierbaren Architekturen bis hin zu pixelgenauen Schnittstellen.",
   "home.cta.projects": "Projekte ansehen",
   "home.cta.contact": "Kontakt aufnehmen",
@@ -76,7 +78,7 @@
   "projects.cat.frontend": "Frontend",
   "projects.cat.backend": "Backend",
   "projects.cat.fullstack": "Full-Stack",
-  "projects.cat.ui": "UI Design",
+  "projects.cat.uidesign": "UI Design",
   "projects.ai-analytics-dashboard.title": "KI-Analyse-Dashboard",
   "projects.ai-analytics-dashboard.desc": "Ein Echtzeit-Dashboard für Predictive Analytics für SaaS-Plattformen unter Verwendung von OpenAI APIs und dynamischem Datenstreaming.",
   "projects.ecommerce-engine.title": "E-Commerce-Engine",
