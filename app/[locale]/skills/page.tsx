@@ -3,32 +3,18 @@
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   ArrowRight,
-  Code2,
   Database,
   LayoutTemplate,
   Server,
   Settings,
 } from "lucide-react";
 import Link from "next/link";
+import { CardSpotlight } from "@/components/ui/aceternity/card-spotlight";
 
 export default function Skills() {
   const { t, i18n } = useTranslation("common");
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-  };
 
   const skills = [
     {
@@ -89,24 +75,25 @@ export default function Skills() {
   ];
 
   return (
-    <div className="container mx-auto px-4 lg:px-8 py-16 md:py-24">
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-        className="max-w-6xl mx-auto space-y-24"
-      >
+    <div className="container mx-auto px-4 lg:px-8 py-16 md:py-24 overflow-hidden">
+      <div className="max-w-6xl mx-auto space-y-32">
         {/* Header Section */}
-        <section className="text-center md:text-left rtl:md:text-right max-w-3xl">
+        <section className="text-center md:text-left rtl:md:text-right max-w-4xl">
           <motion.h1
-            variants={itemVariants}
-            className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="text-4xl md:text-7xl lg:text-8xl font-black mb-8 leading-tight font-heading tracking-tighter"
           >
-            {t("skills.hero.title", "Skills & Technologies")}
+            {t("skills.hero.title", "Expertise")}<span className="text-primary">.</span>
           </motion.h1>
           <motion.p
-            variants={itemVariants}
-            className="text-lg md:text-xl text-muted-foreground leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="text-xl md:text-2xl text-muted-foreground leading-relaxed font-body"
           >
             {t(
               "skills.hero.desc",
@@ -117,94 +104,105 @@ export default function Skills() {
 
         {/* Tech Stack Grid */}
         <section>
-          <motion.div
-            variants={containerVariants}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {skills.map((skill, index) => (
-              <motion.div key={index} variants={itemVariants}>
-                <Card className="h-full hover:shadow-lg transition-all hover:-translate-y-1 bg-card/50 backdrop-blur-sm border-border/50">
-                  <CardHeader className="space-y-4">
-                    <div className="p-3 bg-primary/10 rounded-2xl w-fit">
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+              >
+                <CardSpotlight className="h-full group hover:shadow-2xl transition-shadow duration-500 rounded-[2rem] border-border/10">
+                  <div className="space-y-8 relative z-10">
+                    <div className="p-5 bg-primary/10 rounded-2xl w-fit group-hover:scale-110 transition-transform duration-300">
                       {skill.icon}
                     </div>
                     <div>
-                      <CardTitle className="text-xl mb-2">
+                      <h3 className="text-2xl md:text-3xl font-black mb-4 group-hover:text-primary transition-colors font-heading tracking-tight">
                         {skill.title}
-                      </CardTitle>
-                      <p className="text-sm text-muted-foreground">
+                      </h3>
+                      <p className="text-base md:text-lg text-muted-foreground leading-relaxed font-body">
                         {skill.desc}
                       </p>
                     </div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex flex-wrap gap-2 mt-4">
+                    <div className="flex flex-wrap gap-2 pt-6 border-t border-border/5">
                       {skill.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="px-3 py-1 bg-secondary text-secondary-foreground text-xs font-semibold rounded-full"
+                          className="px-4 py-1.5 bg-secondary/30 text-secondary-foreground text-[10px] font-black uppercase tracking-widest rounded-lg border border-border/50 group-hover:bg-primary/10 group-hover:text-primary group-hover:border-primary/20 transition-all cursor-default"
                         >
                           {tag}
                         </span>
                       ))}
                     </div>
-                  </CardContent>
-                </Card>
+                  </div>
+                </CardSpotlight>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </section>
 
         {/* Approach Section */}
-        <section className="space-y-12">
-          <motion.div variants={itemVariants} className="text-center">
-            <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/50">
-              {t("skills.how.title", "How I Work")}
+        <section className="space-y-20">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center md:text-left rtl:md:text-right"
+          >
+            <h2 className="text-3xl md:text-6xl font-black font-heading tracking-tighter uppercase">
+              {t("skills.how.title", "Philosophies")}<span className="text-primary">.</span>
             </h2>
           </motion.div>
-          <motion.div
-            variants={containerVariants}
-            className="grid grid-cols-1 md:grid-cols-2 gap-8"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {approaches.map((item, index) => (
               <motion.div
                 key={index}
-                variants={itemVariants}
-                className="flex gap-6 p-6 rounded-2xl bg-secondary/30 hover:bg-secondary/50 transition-colors"
+                initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="flex flex-col md:flex-row gap-8 p-10 rounded-[2.5rem] bg-secondary/10 border border-border/5 hover:border-primary/20 hover:bg-secondary/20 transition-all group"
               >
-                <div className="flex-shrink-0 mt-1">
-                  <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">
+                <div className="shrink-0">
+                  <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary font-black text-2xl group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
                     {index + 1}
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold mb-3">{item.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <h3 className="text-2xl md:text-3xl font-black mb-4 group-hover:text-primary transition-colors font-heading tracking-tight underline decoration-primary/20 decoration-4 underline-offset-8">
+                    {item.title}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed text-lg md:text-xl font-body mt-6">
                     {item.desc}
                   </p>
                 </div>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </section>
 
         {/* CTA */}
         <motion.section
-          variants={itemVariants}
-          className="py-12 border-t border-border mt-20 text-center"
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+          className="py-32 border-t border-border/10 text-center"
         >
-          <h2 className="text-3xl md:text-5xl font-black mb-8">
-            {t("skills.cta.title", "Let's build something great together.")}
+          <h2 className="text-4xl md:text-8xl font-black mb-12 max-w-5xl mx-auto leading-[1.1] font-heading tracking-tighter">
+            {t("skills.cta.title", "Let's build something exceptional.")}
           </h2>
           <Link
             href={`/${i18n.language}/contact`}
-            className="inline-flex h-14 items-center justify-center rounded-full bg-primary px-8 text-base font-bold text-primary-foreground shadow-lg transition-all hover:bg-primary/90 hover:scale-105"
+            className="inline-flex h-20 items-center justify-center rounded-2xl bg-primary px-16 text-xl font-black text-primary-foreground shadow-2xl transition-all hover:bg-primary/90 hover:scale-110 active:scale-95 uppercase tracking-widest"
           >
             {t("skills.cta.btn", "Start a Project")}
-            <ArrowRight className="ml-2 h-5 w-5 rtl:rotate-180 rtl:ml-0 rtl:mr-2" />
+            <ArrowRight className="ml-4 h-6 w-6 rtl:rotate-180" />
           </Link>
         </motion.section>
-      </motion.div>
+      </div>
     </div>
   );
 }
