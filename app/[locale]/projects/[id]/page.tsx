@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowLeft, CheckCircle, Info, Terminal } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
@@ -12,9 +12,18 @@ export default function SingleProject({
 }: {
   params: Promise<{ id: string; locale: string }>;
 }) {
-  const { t } = useTranslation("common");
+  const { t, i18n } = useTranslation("common");
   const resolvedParams = React.use(params);
   const { id, locale } = resolvedParams;
+
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
 
   const defaultTitle = id
     .split("-")
@@ -23,153 +32,164 @@ export default function SingleProject({
 
   const title = t(`projects.${id}.title`, defaultTitle);
 
+  const stats = [
+    { label: t("project.stats.time", "Timeline"), value: "3 Months" },
+    { label: t("project.stats.role", "My Role"), value: "Lead dev" },
+    { label: t("project.stats.client", "Client"), value: "Fortune 500" },
+    { label: t("project.stats.tech", "Stack"), value: "Modern Web" },
+  ];
+
   return (
-    <div className="container mx-auto px-4 lg:px-8 py-16 md:py-24">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="max-w-4xl mx-auto space-y-12"
-      >
+    <div ref={containerRef} className="container mx-auto px-4 lg:px-8 py-16 md:py-24 overflow-hidden">
+      <div className="max-w-4xl mx-auto space-y-16">
         <Link
           href={`/${locale}/projects`}
-          className="inline-flex items-center text-muted-foreground hover:text-primary transition-colors text-sm font-semibold uppercase tracking-wider mb-8 group"
+          className="inline-flex items-center text-muted-foreground hover:text-primary transition-all text-sm font-black uppercase tracking-[0.2em] mb-8 group"
         >
-          <ArrowLeft className="mr-2 h-4 w-4 rtl:ml-2 rtl:mr-0 rtl:-scale-x-100 group-hover:-translate-x-1 transition-transform rtl:group-hover:translate-x-1" />
+          <ArrowLeft className="mr-3 h-5 w-5 rtl:ml-3 rtl:mr-0 rtl:-scale-x-100 group-hover:-translate-x-2 transition-transform rtl:group-hover:translate-x-2" />
           {t("project.back", "Back to Projects")}
         </Link>
 
         {/* Header */}
-        <header className="space-y-4">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-foreground">
-            {title}
-          </h1>
-          <p className="text-primary font-medium text-lg">
-            {t(
-              "project.completed",
-              "Project Completed: October 2023 • Case Study",
-            )}
-          </p>
+        <header className="space-y-6">
+          <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="text-4xl md:text-7xl lg:text-8xl font-black text-foreground font-heading lowercase tracking-tighter"
+          >
+            {title}<span className="text-primary">.</span>
+          </motion.h1>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="flex flex-wrap items-center gap-6"
+          >
+            <p className="text-primary font-black text-xl uppercase tracking-widest font-heading">
+              {t("project.completed", "Case Study / 2024")}
+            </p>
+            <div className="h-px w-12 bg-border" />
+            <Badge variant="outline" className="px-4 py-1 rounded-full border-primary/30 text-primary font-bold">
+              {id.includes("dashboard") ? "Analytics" : "Internal App"}
+            </Badge>
+          </motion.div>
         </header>
 
-        {/* Feature Image */}
-        <div className="w-full aspect-video bg-secondary rounded-2xl overflow-hidden shadow-inner relative group flex items-center justify-center border border-border">
-          <span className="text-foreground/5 font-black text-6xl uppercase tracking-widest">
-            {title.split(" ")[0]}
-          </span>
-          <div className="absolute inset-0 bg-primary/10 group-hover:bg-primary/20 transition-colors" />
+        {/* Parallax Feature Image */}
+        <div className="w-full aspect-video rounded-[2rem] overflow-hidden shadow-2xl relative border border-border/20 bg-secondary/20">
+          <motion.div 
+            style={{ y, scale }}
+            className="absolute inset-0 flex items-center justify-center"
+          >
+            <span className="text-foreground/[0.03] font-black text-[15rem] uppercase tracking-tighter select-none rotate-6">
+              {title.split(" ")[0]}
+            </span>
+            <div className="absolute inset-0 bg-primary/5" />
+          </motion.div>
+          <div className="absolute inset-0 bg-linear-to-t from-background/40 to-transparent" />
         </div>
 
-        {/* Overview */}
-        <section className="space-y-4">
-          <h2 className="text-2xl font-bold flex items-center gap-2">
-            <Info className="text-primary h-6 w-6" />
-            {t("project.overview.title", "Project Overview")}
-          </h2>
-          <p className="text-muted-foreground text-lg leading-relaxed">
-            {t(
-              `projects.${id}.overview.desc`,
-              t(
-                "project.overview.desc",
-                "A comprehensive redesign of a high-traffic analytics platform, focusing on user experience, performance optimization, and modern aesthetic principles.",
-              ),
-            )}
-          </p>
-        </section>
-
-        {/* Key Features */}
-        <section className="space-y-6">
-          <h2 className="text-2xl font-bold flex items-center gap-2">
-            <CheckCircle className="text-primary h-6 w-6" />
-            {t("project.features.title", "Key Features")}
-          </h2>
-          <ul className="space-y-6">
-            <li className="flex items-start gap-4">
-              <div className="mt-1">
-                <CheckCircle className="h-5 w-5 text-primary" />
-              </div>
-              <div>
-                <h3 className="font-bold text-lg text-foreground">
-                  {t("project.features.1.title", "Real-time Data Streaming")}
-                </h3>
-                <p className="text-muted-foreground mt-1 text-base">
-                  {t(
-                    "project.features.1.desc",
-                    "Integrated WebSocket architecture for sub-second data updates across all widgets.",
-                  )}
-                </p>
-              </div>
-            </li>
-            <li className="flex items-start gap-4">
-              <div className="mt-1">
-                <CheckCircle className="h-5 w-5 text-primary" />
-              </div>
-              <div>
-                <h3 className="font-bold text-lg text-foreground">
-                  {t("project.features.2.title", "Customizable Widget Engine")}
-                </h3>
-                <p className="text-muted-foreground mt-1 text-base">
-                  {t(
-                    "project.features.2.desc",
-                    "Drag-and-drop interface allowing users to personalize their reporting view.",
-                  )}
-                </p>
-              </div>
-            </li>
-            <li className="flex items-start gap-4">
-              <div className="mt-1">
-                <CheckCircle className="h-5 w-5 text-primary" />
-              </div>
-              <div>
-                <h3 className="font-bold text-lg text-foreground">
-                  {t("project.features.3.title", "Advanced Filtering System")}
-                </h3>
-                <p className="text-muted-foreground mt-1 text-base">
-                  {t(
-                    "project.features.3.desc",
-                    "Complex multi-parameter query builder with natural language processing capabilities.",
-                  )}
-                </p>
-              </div>
-            </li>
-          </ul>
-        </section>
-
-        {/* Technical Details */}
-        <section className="space-y-5 bg-card/60 rounded-3xl p-8 border border-border shadow-sm">
-          <h2 className="text-2xl font-bold flex items-center gap-2">
-            <Terminal className="text-primary h-6 w-6" />
-            {t("project.tech.title", "Technical Details")}
-          </h2>
-          <blockquote className="text-muted-foreground italic text-lg lg:text-xl leading-relaxed border-l-4 border-primary pl-6 rtl:pl-0 rtl:border-l-0 rtl:pr-6 rtl:border-r-4 py-3 my-6 bg-secondary/20 rounded-r-lg rtl:rounded-l-lg rtl:rounded-r-none">
-            &quot;
-            {t(
-              "project.tech.quote",
-              "The main technical hurdle was managing state for thousands of concurrent data points. We implemented a custom Redux middleware and memoized React components to ensure 60FPS performance even during heavy data spikes.",
-            )}
-            &quot;
-          </blockquote>
-
-          <div className="pt-4 border-t border-border/50">
-            <h3 className="font-bold mb-4 text-foreground tracking-wide uppercase text-sm">
-              {t("project.tech.used", "Technologies Used")}
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              <Badge variant="secondary" className="px-4 py-1.5 text-sm">
-                {t("tech.react", "React")}
-              </Badge>
-              <Badge variant="secondary" className="px-4 py-1.5 text-sm">
-                {t("tech.redux", "Redux")}
-              </Badge>
-              <Badge variant="secondary" className="px-4 py-1.5 text-sm">
-                {t("tech.websockets", "WebSockets")}
-              </Badge>
-              <Badge variant="secondary" className="px-4 py-1.5 text-sm">
-                {t("tech.tailwind", "Tailwind CSS")}
-              </Badge>
+        {/* Project Stats Banner */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-8 py-10 border-y border-border/10"
+        >
+          {stats.map((stat, i) => (
+            <div key={i} className="space-y-2">
+              <p className="text-xs font-black uppercase tracking-widest text-muted-foreground">
+                {stat.label}
+              </p>
+              <p className="text-lg font-bold text-foreground font-body">
+                {stat.value}
+              </p>
             </div>
+          ))}
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
+          {/* Main Content */}
+          <div className="md:col-span-2 space-y-20">
+            {/* Overview */}
+            <section className="space-y-8">
+              <h2 className="text-3xl font-black font-heading flex items-center gap-4">
+                <Info className="text-primary h-8 w-8" />
+                {t("project.overview.title", "Project Overview")}
+              </h2>
+              <p className="text-xl text-muted-foreground leading-relaxed font-body">
+                {t(
+                  `projects.${id}.overview.desc`,
+                  t(
+                    "project.overview.desc",
+                    "A comprehensive redesign of a high-traffic analytics platform, focusing on user experience, performance optimization, and modern aesthetic principles.",
+                  ),
+                )}
+              </p>
+            </section>
+
+            {/* Key Features */}
+            <section className="space-y-12">
+              <h2 className="text-3xl font-black font-heading flex items-center gap-4">
+                <CheckCircle className="text-primary h-8 w-8" />
+                {t("project.features.title", "Key Features")}
+              </h2>
+              <div className="space-y-10">
+                {[1, 2, 3].map((f) => (
+                  <motion.div 
+                    key={f}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: f * 0.1 }}
+                    className="flex items-start gap-6 group"
+                  >
+                    <div className="mt-1.5 p-1 rounded-full bg-primary/10 group-hover:bg-primary group-hover:text-primary-foreground transition-all">
+                      <CheckCircle className="h-5 w-5" />
+                    </div>
+                    <div className="space-y-2">
+                      <h3 className="font-black text-2xl text-foreground font-heading uppercase tracking-tight">
+                        {t(`project.features.${f}.title`, `Feature ${f}`)}
+                      </h3>
+                      <p className="text-muted-foreground text-lg leading-relaxed font-body">
+                        {t(`project.features.${f}.desc`, "Integrated architecture for seamless user experience across all digital vertical touchpoints.")}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </section>
           </div>
-        </section>
-      </motion.div>
+
+          {/* Sidebar Tech Details */}
+          <aside className="space-y-10">
+            <section className="space-y-8 bg-secondary/10 rounded-[2rem] p-8 border border-border/10">
+              <h2 className="text-xl font-black font-heading flex items-center gap-3 uppercase tracking-widest text-primary">
+                <Terminal className="h-6 w-6" />
+                {t("project.tech.title", "Stack")}
+              </h2>
+              <div className="flex flex-wrap gap-2">
+                {["React", "Next.js", "Motion", "Tailwind"].map((tech) => (
+                  <Badge 
+                    key={tech} 
+                    variant="secondary" 
+                    className="px-4 py-1.5 rounded-lg bg-background border border-border/50 font-bold text-xs"
+                  >
+                    {tech}
+                  </Badge>
+                ))}
+              </div>
+            </section>
+
+            <section className="p-8 border border-border/10 rounded-[2rem] space-y-6">
+              <p className="text-muted-foreground italic font-body text-lg leading-relaxed">
+                &quot;{t("project.tech.quote", "Scaling this platform required a radical approach to state management.")}&quot;
+              </p>
+            </section>
+          </aside>
+        </div>
+      </div>
     </div>
   );
 }
