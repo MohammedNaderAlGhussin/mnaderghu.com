@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { i18nConfig } from "@/i18nConfig";
+import { motion } from "framer-motion";
 
 export function Navbar() {
   const { t, i18n } = useTranslation("common");
@@ -24,7 +25,7 @@ export function Navbar() {
 
   React.useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      setIsScrolled(window.scrollY > 80);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -39,11 +40,6 @@ export function Navbar() {
     { href: "/contact", label: t("nav.contact", "Contact") },
   ];
 
-  /* 
-    Determine href and active state.
-    Because next-i18n-router keeps /en/about but also just /about if it's default (sometimes).
-    It's safer to always direct to /locale/path.
-  */
   const getHref = (path: string) => {
     return `/${i18n.language}${path === "/" ? "" : path}`;
   };
@@ -67,38 +63,48 @@ export function Navbar() {
   return (
     <nav
       className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-300",
+        "fixed top-0 z-50 w-full transition-all duration-500",
         isScrolled
-          ? "bg-background/80 backdrop-blur-md border-b border-primary/20 shadow-sm"
-          : "bg-transparent border-b border-transparent",
+          ? "bg-background/60 backdrop-blur-xl border-b border-primary/10 shadow-lg py-2"
+          : "bg-transparent border-b border-transparent py-4",
       )}
     >
       <div className="container mx-auto px-4 lg:px-8 flex items-center justify-between h-16">
         <Link
           href={getHref("/")}
-          className="flex items-center space-x-2 rtl:space-x-reverse cursor-pointer"
+          className="flex items-center space-x-2 rtl:space-x-reverse cursor-pointer group"
         >
-          <Terminal className="h-6 w-6 text-primary" />
-          <span className="font-bold text-lg tracking-tight">{t("home.title", "Nader")}</span>
+          <div className="bg-primary/10 p-2 rounded-lg group-hover:bg-primary/20 transition-colors">
+            <Terminal className="h-6 w-6 text-primary" />
+          </div>
+          <span className="font-bold text-xl tracking-tight">{t("home.title", "Nader")}</span>
         </Link>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex items-center space-x-6 rtl:space-x-reverse">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={getHref(link.href)}
-              className={cn(
-                "text-sm font-medium transition-colors hover:text-primary",
-                isActive(link.href)
-                  ? "text-primary border-b-2 border-primary"
-                  : "text-muted-foreground",
-              )}
-            >
-              {link.label}
-            </Link>
-          ))}
-          <div className="flex items-center space-x-2 rtl:space-x-reverse ml-4 rtl:ml-0 rtl:mr-4 border-l rtl:border-l-0 rtl:border-r border-border pl-4 rtl:pl-0 rtl:pr-4">
+        <div className="hidden md:flex items-center space-x-8 rtl:space-x-reverse">
+          {links.map((link) => {
+            const active = isActive(link.href);
+            return (
+              <Link
+                key={link.href}
+                href={getHref(link.href)}
+                className={cn(
+                  "text-sm font-semibold transition-all hover:text-primary relative py-2",
+                  active ? "text-primary" : "text-muted-foreground",
+                )}
+              >
+                {link.label}
+                {active && (
+                  <motion.div
+                    layoutId="navbar-underline"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full"
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                  />
+                )}
+              </Link>
+            );
+          })}
+          <div className="flex items-center space-x-3 rtl:space-x-reverse ml-6 rtl:ml-0 rtl:mr-6 border-l rtl:border-l-0 rtl:border-r border-border/50 pl-6 rtl:pl-0 rtl:pr-4">
             <ThemeToggle />
             <LanguageSwitcher />
           </div>
