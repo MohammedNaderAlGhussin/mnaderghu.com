@@ -12,39 +12,47 @@ export default function Experience() {
 
   const timeline = [
     {
-      role: t("experience.1.role", "Senior UI Designer"),
-      company: t("experience.1.company", "DesignFlow Studio"),
-      date: t("experience.1.date", "2021 - Present"),
-      desc: t(
-        "experience.1.desc",
-        "Leading the design system initiative for Fortune 500 clients. Specialized in rapid prototyping and high-fidelity mockups.",
+      role: String(t("experience.1.role", "Senior UI Designer")),
+      company: String(t("experience.1.company", "DesignFlow Studio")),
+      date: String(t("experience.1.date", "2021 - Present")),
+      desc: String(
+        t(
+          "experience.1.desc",
+          "Leading the design system initiative for Fortune 500 clients. Specialized in rapid prototyping and high-fidelity mockups.",
+        ),
       ),
     },
     {
-      role: t("experience.2.role", "Product Developer"),
-      company: t("experience.2.company", "TechNova Systems"),
-      date: t("experience.2.date", "2018 - 2021"),
-      desc: t(
-        "experience.2.desc",
-        "Engineered responsive front-end components using React and Tailwind CSS. Reduced average page load time by 40%.",
+      role: String(t("experience.2.role", "Product Developer")),
+      company: String(t("experience.2.company", "TechNova Systems")),
+      date: String(t("experience.2.date", "2018 - 2021")),
+      desc: String(
+        t(
+          "experience.2.desc",
+          "Engineered responsive front-end components using React and Tailwind CSS. Reduced average page load time by 40%.",
+        ),
       ),
     },
     {
-      role: t("experience.3.role", "Frontend Engineer"),
-      company: t("experience.3.company", "WebSphere Solutions"),
-      date: t("experience.3.date", "2015 - 2018"),
-      desc: t(
-        "experience.3.desc",
-        "Built progressive web applications and optimized legacy monolithic dashboards into React SPAs.",
+      role: String(t("experience.3.role", "Frontend Engineer")),
+      company: String(t("experience.3.company", "WebSphere Solutions")),
+      date: String(t("experience.3.date", "2015 - 2018")),
+      desc: String(
+        t(
+          "experience.3.desc",
+          "Built progressive web applications and optimized legacy monolithic dashboards into React SPAs.",
+        ),
       ),
     },
     {
-      role: t("experience.4.role", "Junior Web Developer"),
-      company: t("experience.4.company", "Digital Horizon"),
-      date: t("experience.4.date", "2013 - 2015"),
-      desc: t(
-        "experience.4.desc",
-        "Maintained enterprise CMS installations and custom WordPress plugin development.",
+      role: String(t("experience.4.role", "Junior Web Developer")),
+      company: String(t("experience.4.company", "Digital Horizon")),
+      date: String(t("experience.4.date", "2013 - 2015")),
+      desc: String(
+        t(
+          "experience.4.desc",
+          "Maintained enterprise CMS installations and custom WordPress plugin development.",
+        ),
       ),
     },
   ];
@@ -60,7 +68,7 @@ export default function Experience() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="text-4xl md:text-7xl font-black mb-6 leading-tight font-heading"
           >
-            {t("experience.title", "Experience")}
+            {String(t("experience.title", "Experience"))}
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -69,9 +77,11 @@ export default function Experience() {
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             className="text-lg md:text-2xl text-muted-foreground mx-auto max-w-3xl font-body"
           >
-            {t(
-              "experience.desc",
-              "A journey of growth, learning, and crafting exceptional digital products over the past decade.",
+            {String(
+              t(
+                "experience.desc",
+                "A journey of growth, learning, and crafting exceptional digital products over the past decade.",
+              ),
             )}
           </motion.p>
         </section>
@@ -91,10 +101,10 @@ export default function Experience() {
               >
                 {/* Timeline Dot with Pulse */}
                 <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 rtl:translate-x-1/2 w-10 h-10 rounded-full bg-background border-4 border-primary z-10 items-center justify-center">
-                  <motion.div 
+                  <motion.div
                     animate={{ scale: [1, 1.2, 1] }}
                     transition={{ duration: 2, repeat: Infinity }}
-                    className="w-3 h-3 rounded-full bg-primary shadow-[0_0_20px_rgba(0,194,255,1)]" 
+                    className="w-3 h-3 rounded-full bg-primary shadow-[0_0_20px_rgba(0,194,255,1)]"
                   />
                   <div className="absolute inset-0 rounded-full border-4 border-primary/30 animate-ping" />
                 </div>
@@ -103,8 +113,11 @@ export default function Experience() {
                 <div className="hidden md:block w-[45%]" />
 
                 {/* Content Card with Scroll Animation */}
-                <motion.div 
-                  initial={{ opacity: 0, x: isLeft ? (isRtl ? -80 : 80) : (isRtl ? 80 : -80) }}
+                <motion.div
+                  initial={{
+                    opacity: 0,
+                    x: isLeft ? (isRtl ? -80 : 80) : isRtl ? 80 : -80,
+                  }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ duration: 0.8, ease: "easeOut" }}
@@ -119,7 +132,9 @@ export default function Experience() {
                       {/* Mobile Dot */}
                       <div className="absolute top-10 -left-[35px] rtl:left-auto rtl:-right-[35px] md:hidden w-5 h-5 rounded-full bg-primary shadow-[0_0_15px_rgba(0,194,255,0.6)] border-4 border-background" />
 
-                      <div className={`flex flex-col mb-4 ${!isLeft ? "items-start" : "items-end"}`}>
+                      <div
+                        className={`flex flex-col mb-4 ${!isLeft ? "items-start" : "items-end"}`}
+                      >
                         <Badge
                           variant="secondary"
                           className="bg-primary/10 text-primary border border-primary/20 font-black uppercase tracking-widest px-4 py-1 mb-4"
@@ -133,7 +148,7 @@ export default function Experience() {
                           {item.company}
                         </p>
                       </div>
-                      
+
                       <div className="pt-4 border-t border-border/10">
                         <p className="text-muted-foreground leading-relaxed text-lg font-body">
                           {item.desc}
