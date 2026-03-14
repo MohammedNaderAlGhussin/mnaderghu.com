@@ -34,12 +34,6 @@ export function Footer() {
             </span>
             <Linkedin className="h-5 w-5" />
           </Link>
-          <Link href="#" className="hover:text-primary transition-colors">
-            <span className="sr-only">
-              {String(t("social.twitter", "Twitter"))}
-            </span>
-            <Twitter className="h-5 w-5" />
-          </Link>
           <Link
             href="mailto:hello@nader.dev"
             className="hover:text-primary transition-colors"
