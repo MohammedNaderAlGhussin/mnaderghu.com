@@ -4,110 +4,47 @@ import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import {
-  Card,
   CardContent,
   CardHeader,
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowRight, Github, Globe } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { HoverEffect } from "@/components/ui/aceternity/hover-effect";
 import { cn } from "@/lib/utils";
+import { projects } from "@/data/projects";
 
 export default function Projects() {
   const { t, i18n } = useTranslation("common");
   const [filter, setFilter] = React.useState("All");
 
-  const categories = ["All", "Frontend", "Backend", "Full-Stack", "UI Design"];
-
-  const projects = [
-    {
-      id: "ai-analytics-dashboard",
-      title: String(
-        t("projects.ai-analytics-dashboard.title", "AI Analytics Dashboard"),
-      ),
-      category: "Full-Stack",
-      description: String(
-        t(
-          "projects.ai-analytics-dashboard.desc",
-          "A real-time predictive analytics dashboard for SaaS platforms using OpenAI APIs and dynamic data streaming.",
-        ),
-      ),
-      link: `/${i18n.language}/projects/ai-analytics-dashboard`,
-      tech: ["React", "Next.js", "Redux", "Tailwind"],
-    },
-    {
-      id: "ecommerce-engine",
-      title: String(t("projects.ecommerce-engine.title", "E-commerce Engine")),
-      category: "Full-Stack",
-      description: String(
-        t(
-          "projects.ecommerce-engine.desc",
-          "High-performance storefront with headless CMS integration, global state management, and Stripe payments.",
-        ),
-      ),
-      link: `/${i18n.language}/projects/ecommerce-engine`,
-      tech: ["Next.js", "Stripe", "Sanity", "Zustand"],
-    },
-    {
-      id: "web3-wallet",
-      title: String(t("projects.web3-wallet.title", "Web3 Wallet Tracker")),
-      category: "Frontend",
-      description: String(
-        t(
-          "projects.web3-wallet.desc",
-          "Multi-chain portfolio visualizer with live pricing, transaction history, and NFT gallery integration.",
-        ),
-      ),
-      link: `/${i18n.language}/projects/web3-wallet`,
-      tech: ["Ethers.js", "React", "Tailwind", "Wagmi"],
-    },
-    {
-      id: "sentinel-security",
-      title: String(t("projects.sentinel-security.title", "Sentinel Security")),
-      category: "Backend",
-      description: String(
-        t(
-          "projects.sentinel-security.desc",
-          "Infrastructure monitoring tool for cloud deployments with automated threat detection and alert systems.",
-        ),
-      ),
-      link: `/${i18n.language}/projects/sentinel-security`,
-      tech: ["Python", "Docker", "AWS", "PostgreSQL"],
-    },
-    {
-      id: "healthsync-pro",
-      title: String(t("projects.healthsync-pro.title", "HealthSync Pro")),
-      category: "UI Design",
-      description: String(
-        t(
-          "projects.healthsync-pro.desc",
-          "A cross-platform health application integrating wearable data for holistic lifestyle coaching.",
-        ),
-      ),
-      link: `/${i18n.language}/projects/healthsync-pro`,
-      tech: ["Figma", "React Native"],
-    },
-    {
-      id: "nexus-editor",
-      title: String(t("projects.nexus-editor.title", "Nexus Code Editor")),
-      category: "Frontend",
-      description: String(
-        t(
-          "projects.nexus-editor.desc",
-          "Lightweight browser-based IDE with collaborative editing features and real-time compilation.",
-        ),
-      ),
-      link: `/${i18n.language}/projects/nexus-editor`,
-      tech: ["Monaco", "WebSockets", "React"],
-    },
+  const categories = [
+    { label: String(t("projects.filter.all", "All")), value: "All" },
+    { label: String(t("projects.filter.frontend", "Front-End")), value: "frontend" },
+    { label: String(t("projects.filter.fullstack", "Full-Stack")), value: "full-stack" },
+    { label: String(t("projects.filter.aiengineered", "AI Engineered")), value: "ai-engineered" },
   ];
 
-  const filteredProjects =
-    filter === "All" ? projects : projects.filter((p) => p.category === filter);
+  const filteredProjects = projects
+    .filter((p) => filter === "All" || p.category === filter)
+    .sort((a, b) => (a.featured === b.featured ? 0 : a.featured ? -1 : 1));
+
+  const getBadgeColor = (category: string) => {
+    switch (category) {
+      case "frontend":
+        return "bg-blue-500/10 text-blue-500 border-blue-500/20";
+      case "full-stack":
+        return "bg-cyan-500/10 text-cyan-500 border-cyan-500/20";
+      case "ai-engineered":
+        return "bg-purple-500/10 text-purple-500 border-purple-500/20";
+      default:
+        return "bg-primary/10 text-primary border-primary/20";
+    }
+  };
 
   return (
     <div className="container mx-auto px-4 lg:px-8 py-16 md:py-24 overflow-hidden">
@@ -149,22 +86,17 @@ export default function Projects() {
         >
           {categories.map((cat) => (
             <Button
-              key={cat}
-              variant={filter === cat ? "default" : "outline"}
-              onClick={() => setFilter(cat)}
+              key={cat.value}
+              variant={filter === cat.value ? "default" : "outline"}
+              onClick={() => setFilter(cat.value)}
               className={cn(
                 "rounded-full font-black px-8 h-12 transition-all active:scale-95 uppercase tracking-widest text-xs",
-                filter === cat
+                filter === cat.value
                   ? "shadow-lg shadow-primary/20"
                   : "border-border/50 text-muted-foreground",
               )}
             >
-              {String(
-                t(
-                  `projects.cat.${cat.toLowerCase().replace("-", "").replace(/\s+/g, "")}`,
-                  cat,
-                ),
-              )}
+              {cat.label}
             </Button>
           ))}
         </motion.section>
@@ -173,54 +105,107 @@ export default function Projects() {
         <section className="relative z-10">
           <HoverEffect
             items={filteredProjects}
-            renderItem={(item) => (
-              <Link href={item.link} className="block h-full group">
-                <Card className="h-full flex flex-col bg-card/60 backdrop-blur-md border-border/10 group-hover:border-primary/30 transition-all duration-500 overflow-hidden relative rounded-[2rem]">
-                  <div className="h-64 bg-secondary/20 w-full relative overflow-hidden flex items-center justify-center">
-                    <span className="text-foreground/[0.03] font-black text-8xl uppercase tracking-tighter transform -rotate-12 select-none group-hover:scale-125 transition-transform duration-700">
-                      {item.title.split(" ")[0]}
-                    </span>
-                    <div className="absolute inset-0 bg-linear-to-t from-background/90 via-transparent to-transparent z-10" />
-                    <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity z-10" />
+            renderItem={(project) => (
+              <div className="h-full flex flex-col bg-card/60 backdrop-blur-md border-border/10 hover:border-primary/30 transition-all duration-500 overflow-hidden relative rounded-[2rem] group/card">
+                <div className="h-64 w-full relative overflow-hidden flex items-center justify-center bg-secondary/20">
+                  {project.thumbnail ? (
+                    <Image
+                      src={project.thumbnail}
+                      alt={project.title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover/card:scale-110"
+                    />
+                  ) : (
+                    <div className="flex items-center justify-center h-full w-full bg-secondary/10">
+                      <span className="text-foreground/20 font-black text-2xl uppercase tracking-tighter text-center px-4">
+                        {project.title}
+                      </span>
+                    </div>
+                  )}
+                  <div className="absolute inset-0 bg-linear-to-t from-background/90 via-transparent to-transparent z-10" />
+                  <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover/card:opacity-100 transition-opacity z-10" />
+                </div>
+
+                <CardHeader className="flex-1 relative z-20 -mt-16 mx-6 bg-card backdrop-blur-xl border border-border/10 rounded-[1.5rem] p-8 group-hover/card:border-primary/20 transition-all shadow-2xl">
+                  <div className="flex justify-between items-start mb-6">
+                    <Badge
+                      variant="secondary"
+                      className={cn(
+                        "font-black px-4 py-1 text-[10px] uppercase tracking-widest rounded-lg border",
+                        getBadgeColor(project.category)
+                      )}
+                    >
+                      {String(t(`projects.cat.${project.category.replace("-", "")}`, project.category))}
+                    </Badge>
+                  </div>
+                  <CardTitle className="text-3xl font-black line-clamp-1 group-hover/card:text-primary transition-colors font-heading tracking-tight text-center">
+                    {project.title}
+                  </CardTitle>
+                  <CardDescription className="line-clamp-3 mt-6 text-base text-muted-foreground leading-relaxed font-body">
+                    {String(
+                      t(
+                        `projects.${project.id}.shortDescription`,
+                        project.shortDescription,
+                      ),
+                    )}
+                  </CardDescription>
+
+                  <div className="flex flex-wrap gap-4 mt-8 pt-4">
+                    {project.liveUrl && (
+                      <Link
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={cn(
+                          buttonVariants({ variant: "link" }),
+                          "p-0 h-auto text-xs font-black uppercase tracking-widest text-primary hover:no-underline flex items-center gap-2 group/btn"
+                        )}
+                      >
+                        <Globe className="w-4 h-4" />
+                        {String(t("project.live", "Live Demo"))}
+                      </Link>
+                    )}
+                    {project.githubUrl && (
+                      <Link
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={cn(
+                          buttonVariants({ variant: "link" }),
+                          "p-0 h-auto text-xs font-black uppercase tracking-widest text-muted-foreground hover:text-primary hover:no-underline flex items-center gap-2 group/btn"
+                        )}
+                      >
+                        <Github className="w-4 h-4" />
+                        {String(t("project.github", "GitHub"))}
+                      </Link>
+                    )}
+                  </div>
+                </CardHeader>
+
+                <CardContent className="px-8 pb-8 relative z-20 flex flex-col gap-6">
+                  <div className="flex flex-wrap gap-2 pt-6 border-t border-border/5">
+                    {project.tags.map((tag: string) => (
+                      <span
+                        key={tag}
+                        className="text-[9px] uppercase font-black text-muted-foreground/50 border border-border/10 px-3 py-1 rounded-full bg-secondary/10"
+                      >
+                        {tag}
+                      </span>
+                    ))}
                   </div>
 
-                  <CardHeader className="flex-1 relative z-20 -mt-16 mx-6 bg-card backdrop-blur-xl border border-border/10 rounded-[1.5rem] p-8 group-hover:border-primary/20 transition-all shadow-2xl">
-                    <div className="flex justify-between items-start mb-6">
-                      <Badge
-                        variant="secondary"
-                        className="bg-primary/10 text-primary border border-primary/20 font-black px-4 py-1 text-[10px] uppercase tracking-widest rounded-lg"
-                      >
-                        {String(
-                          t(
-                            `projects.cat.${item.category.toLowerCase().replace("-", "").replace(/\s+/g, "")}`,
-                            item.category,
-                          ),
-                        )}
-                      </Badge>
-                      <ExternalLink className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors hover:scale-125" />
-                    </div>
-                    <CardTitle className="text-3xl font-black line-clamp-1 group-hover:text-primary transition-colors font-heading tracking-tight">
-                      {item.title}
-                    </CardTitle>
-                    <CardDescription className="line-clamp-3 mt-6 text-base text-muted-foreground leading-relaxed font-body">
-                      {item.description}
-                    </CardDescription>
-                  </CardHeader>
-
-                  <CardContent className="px-8 pb-8 relative z-20">
-                    <div className="flex flex-wrap gap-2 mt-6 pt-6 border-t border-border/5">
-                      {item.tech.map((tech: string) => (
-                        <span
-                          key={tech}
-                          className="text-[9px] uppercase font-black text-muted-foreground/50 border border-border/10 px-3 py-1 rounded-full bg-secondary/10"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
+                  <Link
+                    href={`/${i18n.language}/projects/${project.id}`}
+                    className={cn(
+                      buttonVariants({ variant: "default" }),
+                      "w-full rounded-2xl h-14 font-black uppercase tracking-widest text-xs group/btn"
+                    )}
+                  >
+                    {String(t("project.viewDetails", "View Details"))}
+                    <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover/btn:translate-x-1 rtl:rotate-180 rtl:group-hover/btn:-translate-x-1" />
+                  </Link>
+                </CardContent>
+              </div>
             )}
           />
         </section>
