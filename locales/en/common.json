@@ -71,44 +71,29 @@
   "skills.cta.btn": "Start a Project",
   "projects.hero.title": "My Projects",
   "projects.hero.desc": "A curated selection of my professional work and personal experiments in the realm of full-stack development and UI design.",
-  "projects.cta.title": "Want to collaborate?",
+  "projects.cta.title": "Ready to collaborate?",
   "projects.cta.desc": "I'm currently available for freelance work and open-source collaborations. Let's build something amazing together.",
-  "projects.cta.btn": "Contact Me",
-  "projects.cat.all": "All",
+  "projects.cta.btn": "Get in touch",
   "projects.cat.frontend": "Frontend",
-  "projects.cat.backend": "Backend",
   "projects.cat.fullstack": "Full-Stack",
-  "projects.cat.uidesign": "UI Design",
-  "projects.ai-analytics-dashboard.title": "AI Analytics Dashboard",
-  "projects.ai-analytics-dashboard.desc": "A real-time predictive analytics dashboard for SaaS platforms using OpenAI APIs and dynamic data streaming.",
-  "projects.ecommerce-engine.title": "E-commerce Engine",
-  "projects.ecommerce-engine.desc": "High-performance storefront with headless CMS integration, global state management, and Stripe payments.",
-  "projects.web3-wallet.title": "Web3 Wallet Tracker",
-  "projects.web3-wallet.desc": "Multi-chain portfolio visualizer with live pricing, transaction history, and NFT gallery integration.",
-  "projects.sentinel-security.title": "Sentinel Security",
-  "projects.sentinel-security.desc": "Infrastructure monitoring tool for cloud deployments with automated threat detection and alert systems.",
-  "projects.healthsync-pro.title": "HealthSync Pro",
-  "projects.healthsync-pro.desc": "A cross-platform health application integrating wearable data for holistic lifestyle coaching.",
-  "projects.nexus-editor.title": "Nexus Code Editor",
-  "projects.nexus-editor.desc": "Lightweight browser-based IDE with collaborative editing features and real-time compilation.",
+  "projects.cat.aiengineered": "AI Engineered",
+  "projects.filter.all": "All",
+  "projects.filter.frontend": "Front-End",
+  "projects.filter.fullstack": "Full-Stack",
+  "projects.filter.aiengineered": "AI Engineered",
   "project.back": "Back to Projects",
-  "project.completed": "Project Completed: October 2023 • Case Study",
+  "project.live": "Live Demo",
+  "project.github": "View Code on GitHub",
+  "project.viewDetails": "View Details",
+  "project.readMore": "Read More",
   "project.overview.title": "Project Overview",
-  "project.overview.desc": "A comprehensive redesign of a high-traffic analytics platform, focusing on user experience, performance optimization, and modern aesthetic principles. The challenge was to transform complex data sets into intuitive, actionable insights for enterprise-level decision makers.",
   "project.features.title": "Key Features",
-  "project.features.1.title": "Real-time Data Streaming",
-  "project.features.1.desc": "Integrated WebSocket architecture for sub-second data updates across all widgets.",
-  "project.features.2.title": "Customizable Widget Engine",
-  "project.features.2.desc": "Drag-and-drop interface allowing users to personalize their reporting view.",
-  "project.features.3.title": "Advanced Filtering System",
-  "project.features.3.desc": "Complex multi-parameter query builder with natural language processing capabilities.",
   "project.tech.title": "Technical Details",
-  "project.tech.quote": "The main technical hurdle was managing state for thousands of concurrent data points. We implemented a custom Redux middleware and memoized React components to ensure 60FPS performance even during heavy data spikes.",
-  "project.tech.used": "Technologies Used",
-  "tech.react": "React",
-  "tech.redux": "Redux",
-  "tech.websockets": "WebSockets",
-  "tech.tailwind": "Tailwind CSS",
+  "project.private": "Private Project",
+  "project.stats.timeline": "Timeline",
+  "project.stats.role": "Role",
+  "project.stats.client": "Client",
+  "project.stats.stack": "Stack",
   "experience.title": "Experience",
   "experience.desc": "A journey of growth, learning, and crafting exceptional digital products over the past decade.",
   "experience.1.role": "Senior UI Designer",
@@ -144,5 +129,156 @@
   "contact.form.message.placeholder": "How can I help you?",
   "contact.form.sending": "Sending...",
   "contact.form.sent": "Message Sent!",
-  "contact.form.submit": "Send Message"
+  "contact.form.submit": "Send Message",
+  "projects": {
+    "kaufra": {
+      "shortDescription": "A modern, production-ready full-stack e-commerce platform with admin dashboard, secure auth, and real payment integration.",
+      "fullDescription": "Kaufra is a production-ready e-commerce platform built with the latest web technologies. It features a complete shopping experience from product browsing and filtering to secure checkout with real payment gateways. The platform includes role-based authentication, an admin dashboard with analytics, order management, image uploads, and email notifications — all built on a scalable Next.js App Router architecture with server components and server actions.",
+      "timeline": "3 Months",
+      "client": "Personal Project",
+      "keyFeatures": [
+        {
+          "title": "FULL SHOPPING EXPERIENCE",
+          "description": "Complete product browsing, filtering, dynamic product pages, cart management, and a full checkout flow with PayPal and Stripe integration."
+        },
+        {
+          "title": "SECURE AUTHENTICATION",
+          "description": "NextAuth with credentials, JWT sessions stored in cookies, and role-based authorization separating Admin and User access levels."
+        },
+        {
+          "title": "ADMIN DASHBOARD",
+          "description": "Full-featured admin panel with revenue metrics, charts via Recharts, order tracking, product CRUD with media uploads, and user management."
+        },
+        {
+          "title": "MODERN BACKEND ARCHITECTURE",
+          "description": "Built entirely on Next.js server actions and server components, with PostgreSQL via Prisma ORM including migrations, seeding, and clean schema design."
+        },
+        {
+          "title": "MEDIA & NOTIFICATIONS",
+          "description": "Image and file uploads handled via UploadThing. Transactional email notifications powered by Resend and React Email."
+        }
+      ],
+      "technicalQuote": "The biggest challenge was managing secure role-based access across server components and server actions simultaneously, while keeping the architecture clean and the performance sharp."
+    },
+    "quran-tracker": {
+      "shortDescription": "A full-stack spiritual platform helping users track their Quran reading progress, maintain streaks, and share reflections within a supportive community.",
+      "fullDescription": "QuranTracker is a production-grade full-stack spiritual platform built for a real-world client. I set up the entire environment, defined the technology stack, and acted as Project Manager — leveraging AI to deliver a high-quality product with continuous enhancements and self-debugging cycles. The platform helps users track their Quran reading progress across Surahs and Juz, maintain daily streaks, visualize reading patterns, and connect with a community through a distraction-free, elegantly designed interface.",
+      "timeline": "2 Months",
+      "client": "Private Client",
+      "keyFeatures": [
+        {
+          "title": "SPIRITUAL PROGRESS TRACKING",
+          "description": "Elevated progress visualization for both Surahs and Juz, daily reading streak monitoring with visual history, and deep statistics on reading velocity and consistency patterns."
+        },
+        {
+          "title": "MULTILINGUAL SUPPORT",
+          "description": "Full internationalization across English, Arabic, and Turkish. Arabic triggers a complete RTL layout flip — mirroring navigation, cards, and text alignment — ensuring a native reading experience for Arabic-speaking users."
+        },
+        {
+          "title": "KEEP IN PRAYERS",
+          "description": "A unique alternative to social media likes — a silent spiritual signal that privately notifies the author someone is praying for them, with no public counts. Genuine community support over vanity metrics."
+        },
+        {
+          "title": "COMMUNITY REFLECTIONS",
+          "description": "A dedicated space for users to post spiritual insights and reflections in a bespoke, distraction-free UI designed for contemplation and meaningful connection."
+        },
+        {
+          "title": "ADMIN PANEL",
+          "description": "Full admin dashboard tracking total users, pages read, streaks, and per-user progress history. Includes a complete audit log and user management tools."
+        },
+        {
+          "title": "PROFILE & ACCOUNT MANAGEMENT",
+          "description": "Full profile customization including avatar upload, name and password changes, and a secure account deletion option — all protected via Supabase Auth and RLS policies."
+        }
+      ],
+      "technicalQuote": "The 'Keep in Prayers' feature challenged me to rethink social interaction from first principles — stripping away vanity metrics and replacing them with something genuinely meaningful to the user."
+    },
+    "social-media-platform": {
+      "shortDescription": "A fully responsive full-scale social media web app built from scratch with React, TypeScript, and Redux Toolkit — focused on clean architecture and real-world practices.",
+      "fullDescription": "A fully responsive social media platform built from scratch using the Tarmeez Academy public learning API. The focus was never just making it work — it was making it clean, readable, and scalable. The app is fully typed with strict TypeScript, features a well-structured Redux architecture with slices and thunks, and a centralized Axios API layer with interceptors. Every feature from authentication to post management was designed with real-world production standards in mind.",
+      "timeline": "3 Months",
+      "client": "Personal Project",
+      "keyFeatures": [
+        {
+          "title": "AUTHENTICATION & AUTHORIZATION",
+          "description": "Secure login and registration flow with protected routes — no localStorage hacks, fully API-driven session handling."
+        },
+        {
+          "title": "POST MANAGEMENT",
+          "description": "Full create, edit, and delete functionality for posts with image upload support and dynamic rendering."
+        },
+        {
+          "title": "DYNAMIC USER PROFILES",
+          "description": "User profiles fetched entirely from the API, with comments system, modal UI, and paginated feeds."
+        },
+        {
+          "title": "CLEAN ARCHITECTURE",
+          "description": "Future-proof folder structure, strictly typed codebase with no 'any', well-organized Redux slices and thunks, and a centralized Axios layer with interceptors."
+        },
+        {
+          "title": "POLISHED UX",
+          "description": "Framer Motion micro-animations, toast feedback for all user actions, loading states, and full responsiveness across all screen sizes."
+        }
+      ],
+      "technicalQuote": "The most important part wasn't just making it work — it was making it clean, readable, and scalable. Strict TypeScript and a well-structured Redux architecture were non-negotiable from day one."
+    },
+    "marketing-dashboard": {
+      "shortDescription": "A comprehensive marketing analytics dashboard with real-time campaign insights, demographic analysis, regional data, and weekly performance trends.",
+      "fullDescription": "A comprehensive marketing analytics dashboard built with Next.js 15 and TypeScript, providing real-time insights into campaign performance, audience demographics, regional data, and weekly trends. The dashboard integrates with an external API from Amana Bootcamp and delivers a clean, data-rich interface for tracking KPIs including total campaigns, revenue, ROAS, and conversion rates — all in one unified view.",
+      "timeline": "1 Month",
+      "client": "Amana Bootcamp",
+      "keyFeatures": [
+        {
+          "title": "DASHBOARD OVERVIEW",
+          "description": "Real-time marketing metrics and KPIs including total campaigns, revenue, ROAS, conversion tracking, and peak performance analytics."
+        },
+        {
+          "title": "CAMPAIGN ANALYTICS",
+          "description": "Detailed campaign performance tracking with advanced filtering by name and type, interactive revenue and ROAS charts, and performance breakdown by medium — Instagram, Facebook, and Google Ads."
+        },
+        {
+          "title": "DEMOGRAPHIC INSIGHTS",
+          "description": "Audience analysis covering age groups, gender performance, device tracking, and target audience insights for data-driven decision making."
+        },
+        {
+          "title": "WEEKLY PERFORMANCE",
+          "description": "Week-over-week performance tracking with time-based analytics, historical trends, and visual breakdowns of key metrics over time."
+        },
+        {
+          "title": "REGIONAL ANALYTICS",
+          "description": "Geographic performance breakdown with country and region-specific metrics, regional ROAS tracking, and conversion data by location."
+        }
+      ],
+      "technicalQuote": "The challenge was transforming complex, multi-dimensional marketing data into a clean and intuitive interface — making every metric immediately readable without overwhelming the user."
+    },
+    "sprachly": {
+      "shortDescription": "A modern real-time chat application with instant messaging, live presence tracking, private DMs, and secure channel management.",
+      "fullDescription": "Sprachly is a modern real-time communication platform built using a vibe-coding workflow. Rather than manual line-by-line coding, I acted as Product Engineer — focusing on system architecture, security logic, and orchestration of professional-grade external services. I directed AI agents for rapid prototyping while personally solving complex integration challenges, governing the technical stack, and ensuring production-level security through Supabase Row-Level Security policies.",
+      "timeline": "1 Month",
+      "client": "Personal Project",
+      "keyFeatures": [
+        {
+          "title": "REAL-TIME MESSAGING ENGINE",
+          "description": "Sub-millisecond message delivery and synchronization powered by Ably WebSockets, with live typing indicators and instant channel updates."
+        },
+        {
+          "title": "LIVE PRESENCE SYSTEM",
+          "description": "Global state tracking for online, offline, and away user statuses — users always know who's available in real time."
+        },
+        {
+          "title": "CHANNEL & DM MANAGEMENT",
+          "description": "Create and join public channels or start private Direct Message conversations with secure message isolation enforced at the database level."
+        },
+        {
+          "title": "SECURE AUTHENTICATION",
+          "description": "User login, signup, and profile management via Supabase Auth, with Row-Level Security policies ensuring strict data privacy between users."
+        },
+        {
+          "title": "PROFILE & AVATAR UPLOADS",
+          "description": "Users can customize their profiles and upload avatars, with a premium responsive UI built with Tailwind CSS and shadcn/ui atomic components."
+        }
+      ],
+      "technicalQuote": "The real challenge wasn't the real-time messaging — it was enforcing airtight Row-Level Security policies in Supabase to guarantee that private messages could never leak between users, even at the database query level."
+    }
+  }
 }
