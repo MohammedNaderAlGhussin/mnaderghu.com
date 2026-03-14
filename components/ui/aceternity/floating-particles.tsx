@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { useTheme } from "next-themes";
 
 interface Particle {
@@ -16,15 +16,7 @@ interface Particle {
 export const FloatingParticles = ({ className }: { className?: string }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { theme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (!mounted) return;
-
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -93,9 +85,7 @@ export const FloatingParticles = ({ className }: { className?: string }) => {
       window.removeEventListener("resize", resize);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [mounted, theme]);
-
-  if (!mounted) return null;
+  }, [theme]);
 
   return (
     <div className={`pointer-events-none absolute inset-0 z-0 ${className}`}>
