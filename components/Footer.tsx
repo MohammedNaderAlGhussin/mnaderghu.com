@@ -22,13 +22,19 @@ export function Footer() {
         </div>
 
         <div className="flex space-x-6 rtl:space-x-reverse">
-          <Link href="#" className="hover:text-primary transition-colors">
+          <Link
+            href="https://github.com/NaderAlghussin"
+            className="hover:text-primary transition-colors"
+          >
             <span className="sr-only">
               {String(t("social.github", "GitHub"))}
             </span>
             <Github className="h-5 w-5" />
           </Link>
-          <Link href="#" className="hover:text-primary transition-colors">
+          <Link
+            href="https://www.linkedin.com/in/mohammednader-alghussin"
+            className="hover:text-primary transition-colors"
+          >
             <span className="sr-only">
               {String(t("social.linkedin", "LinkedIn"))}
             </span>
