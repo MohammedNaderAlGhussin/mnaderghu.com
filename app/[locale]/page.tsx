@@ -31,10 +31,10 @@ export default function Home() {
             transition={{ duration: 0.5 }}
             className="max-w-4xl"
           >
-            <div className="mb-4">
+            <div className="">
               <TextGenerateEffect
                 words={String(t("home.title"))}
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter text-foreground mb-4 font-heading"
+                className="text-center md:text-start text-xl md:text-3xl lg:text-5xl xl:text-6xl font-black tracking-tight text-foreground font-heading"
               />
             </div>
 
