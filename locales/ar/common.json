@@ -129,9 +129,14 @@
   "contact.form.email.placeholder": "أدخل بريدك الإلكتروني",
   "contact.form.message": "محتوى الرسالة",
   "contact.form.message.placeholder": "اكتب رسالتك",
-  "contact.form.sending": "جاري المعالجة...",
+  "contact.form.sending": "جاري الإرسال...",
   "contact.form.sent": "تم بنجاح!",
   "contact.form.submit": "إرسال الرسالة",
+  "contact.form.success": "تم إرسال رسالتك! سأرد عليك خلال 24 ساعة.",
+  "contact.form.error": "حدث خطأ ما. يرجى المحاولة مرة أخرى أو مراسلتي مباشرة.",
+  "contact.form.error.name": "يجب أن يحتوي الاسم على حرفين على الأقل",
+  "contact.form.error.email": "يرجى إدخال بريد إلكتروني صحيح",
+  "contact.form.error.message": "يجب أن تحتوي الرسالة على 10 أحرف على الأقل",
   "projects": {
     "kaufra": {
       "shortDescription": "منصة تجارة إلكترونية شاملة وجاهزة للإنتاج، تتميز بلوحة تحكم للمسؤول، مصادقة آمنة، ودمج حقيقي لعمليات الدفع.",

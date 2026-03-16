@@ -129,9 +129,14 @@
   "contact.form.email.placeholder": "Ihre E-Mail",
   "contact.form.message": "Nachricht",
   "contact.form.message.placeholder": "Ihre Nachricht",
-  "contact.form.sending": "Verarbeitung",
+  "contact.form.sending": "Wird gesendet...",
   "contact.form.sent": "Erfolg!",
   "contact.form.submit": "Nachricht senden",
+  "contact.form.success": "Nachricht gesendet! Ich melde mich innerhalb von 24 Stunden.",
+  "contact.form.error": "Etwas ist schiefgelaufen. Bitte versuche es erneut oder schreib mir direkt.",
+  "contact.form.error.name": "Name muss mindestens 2 Zeichen lang sein",
+  "contact.form.error.email": "Bitte gib eine gültige E-Mail-Adresse ein",
+  "contact.form.error.message": "Nachricht muss mindestens 10 Zeichen lang sein",
   "projects": {
     "kaufra": {
       "shortDescription": "Eine moderne, produktionsbereite Full-Stack-E-Commerce-Plattform mit Admin-Dashboard, sicherer Authentifizierung und Integration realer Zahlungssysteme.",

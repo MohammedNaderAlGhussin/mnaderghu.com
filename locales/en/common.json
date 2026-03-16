@@ -129,9 +129,14 @@
   "contact.form.email.placeholder": "Enter your email",
   "contact.form.message": "Message",
   "contact.form.message.placeholder": "Write your message",
-  "contact.form.sending": "Processing",
+  "contact.form.sending": "Sending...",
   "contact.form.sent": "Success!",
   "contact.form.submit": "Send Message",
+  "contact.form.success": "Message sent! I'll get back to you within 24 hours.",
+  "contact.form.error": "Something went wrong. Please try again or email me directly.",
+  "contact.form.error.name": "Name must be at least 2 characters",
+  "contact.form.error.email": "Please enter a valid email address",
+  "contact.form.error.message": "Message must be at least 10 characters",
   "projects": {
     "kaufra": {
       "shortDescription": "A modern, production-ready full-stack e-commerce platform with admin dashboard, secure auth, and real payment integration.",
