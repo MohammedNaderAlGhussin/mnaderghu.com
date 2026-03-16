@@ -21,7 +21,7 @@ export function Footer() {
           )}
         </div>
 
-        <div className="flex space-x-6 rtl:space-x-reverse">
+        <div className="flex flex-wrap items-center justify-center md:justify-end gap-6 w-full md:w-auto">
           <Link
             href="https://github.com/NaderAlghussin"
             className="hover:text-primary transition-colors"
