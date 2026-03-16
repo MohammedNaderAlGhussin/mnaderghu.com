@@ -14,6 +14,7 @@ import {
   Loader2,
   Send,
   CheckCircle,
+  AlertCircle,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -22,21 +23,23 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { DotBackground } from "@/components/ui/aceternity/dot-background";
-
-const contactSchema = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-  email: z.string().email({ message: "Invalid email address." }),
-  message: z
-    .string()
-    .min(10, { message: "Message must be at least 10 characters." }),
-});
-
-type ContactFormValues = z.infer<typeof contactSchema>;
+import { sendEmail } from "@/actions/sendEmail";
 
 export default function Contact() {
   const { t } = useTranslation("common");
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
+  const [errorMsg, setErrorMsg] = React.useState<string | null>(null);
+
+  const contactSchema = z.object({
+    name: z.string().min(2, { message: String(t("contact.form.error.name")) }),
+    email: z.string().email({ message: String(t("contact.form.error.email")) }),
+    message: z
+      .string()
+      .min(10, { message: String(t("contact.form.error.message")) }),
+  });
+
+  type ContactFormValues = z.infer<typeof contactSchema>;
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
@@ -49,12 +52,24 @@ export default function Contact() {
 
   const onSubmit = async (data: ContactFormValues) => {
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    console.log("Form Submitted", data);
-    setIsSubmitting(false);
-    setIsSuccess(true);
-    form.reset();
-    setTimeout(() => setIsSuccess(false), 5000);
+    setErrorMsg(null);
+    setIsSuccess(false);
+
+    try {
+      const result = await sendEmail(data);
+      
+      if (result.success) {
+        setIsSuccess(true);
+        form.reset();
+        setTimeout(() => setIsSuccess(false), 5000);
+      } else {
+        setErrorMsg(result.error || String(t("contact.form.error")));
+      }
+    } catch {
+      setErrorMsg(String(t("contact.form.error")));
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const itemVariants: Variants = {
@@ -245,6 +260,36 @@ export default function Contact() {
                           </p>
                         )}
                       </div>
+
+                      <AnimatePresence>
+                        {(errorMsg || isSuccess) && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            className="overflow-hidden"
+                          >
+                            <div
+                              className={`p-4 rounded-xl flex items-center gap-3 ${
+                                isSuccess
+                                  ? "bg-green-500/10 text-green-400 border border-green-500/20"
+                                  : "bg-destructive/10 text-destructive border border-destructive/20"
+                              }`}
+                            >
+                              {isSuccess ? (
+                                <CheckCircle className="h-5 w-5 shrink-0" />
+                              ) : (
+                                <AlertCircle className="h-5 w-5 shrink-0" />
+                              )}
+                              <p className="text-sm font-bold font-body">
+                                {isSuccess
+                                  ? String(t("contact.form.success"))
+                                  : errorMsg}
+                              </p>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
 
                       <Button
                         type="submit"
