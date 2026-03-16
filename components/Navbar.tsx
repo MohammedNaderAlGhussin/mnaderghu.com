@@ -72,7 +72,7 @@ export function Navbar() {
       <div className="container mx-auto px-4 lg:px-8 flex items-center justify-between h-16">
         <Link
           href={getHref("/")}
-          className="flex items-center space-x-2 rtl:space-x-reverse cursor-pointer group"
+          className="flex items-center gap-3 cursor-pointer group"
         >
           <div className="bg-primary/10 p-2 rounded-lg group-hover:bg-primary/20 transition-colors">
             <Terminal className="h-6 w-6 text-primary" />
@@ -133,7 +133,7 @@ export function Navbar() {
               <SheetDescription className="sr-only">
                 {String(t("nav.menu.desc", "Links to navigate the portfolio"))}
               </SheetDescription>
-              <div className="flex items-center space-x-2 rtl:space-x-reverse mt-6 mb-8">
+              <div className="flex items-center gap-3 mt-6 mb-8">
                 <Terminal className="h-6 w-6 text-primary" />
                 <span className="font-bold text-lg tracking-tight">
                   {String(t("home.title", "Nader"))}
