@@ -78,7 +78,7 @@ export function Navbar() {
             <Terminal className="h-6 w-6 text-primary" />
           </div>
           <span className="font-bold text-xl tracking-tight">
-            {String(t("home.title", "Nader"))}
+            {String(t("nav.name", "Nader"))}
           </span>
         </Link>
 
