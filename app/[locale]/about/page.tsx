@@ -28,7 +28,7 @@ export default function About() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-8 leading-tight font-heading">
+            <h1 className="text-4xl md:text-6xl font-black mb-8 leading-tight font-heading">
               {String(t("about.hero.title", "Creative Designer & Developer"))}
             </h1>
             <div className="h-1 w-20 bg-primary rounded-full mb-8" />
