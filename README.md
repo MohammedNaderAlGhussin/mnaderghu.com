@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Professional Full-Stack Portfolio
 
-## Getting Started
+A high-performance, modern, and multilingual portfolio website built with **Next.js**, **TypeScript**, and **Framer Motion**. This project showcases advanced web development skills, featuring a responsive design, real-time animations, and a production-ready contact system.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Live Demo
+**[mohammednaderalghussin.vercel.app](https://mohammednaderalghussin.vercel.app/)**
+
+---
+
+## 📸 Screenshots
+
+### Home Page
+![Home Page](/public/screenshots/home.png)
+
+### About Page
+![About Page](/public/screenshots/about.png)
+
+### Projects Page
+![Projects Page](/public/screenshots/projects.png)
+
+---
+
+## ✨ Key Features
+
+- **🌐 Multilingual Support (i18n)**: Fully translated into **English**, **Arabic (RTL)**, and **German** using `i18next`.
+- **📧 Production Contact Form**: Integrated with **Resend API** for reliable email delivery with server-side validation.
+- **✨ Premium UI/UX**:
+  - Dynamic backgrounds and floating particles.
+  - Smooth page transitions and scroll-driven animations using **Framer Motion**.
+  - Glassmorphism effects and modern typography.
+- **📱 Fully Responsive**: Optimized for all devices from 320px mobile to ultra-wide desktops.
+- **🛠️ Tech Stack**:
+  - **Framework**: Next.js 15+ (App Router)
+  - **Language**: TypeScript (Strict Mode)
+  - **Styling**: Tailwind CSS & Lucide Icons
+  - **Animation**: Framer Motion & Aceternity UI components
+  - **Forms**: React Hook Form & Zod Validation
+  - **Email**: Resend
+
+---
+
+## 🛠️ Installation & Setup
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/MohammedNaderAlGhussin/mohammednaderalghussin.me.git
+   cd portfolio
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Environment Variables**:
+   Create a `.env.local` file in the root directory and add your Resend API Key:
+   ```env
+   RESEND_API_KEY=your_resend_api_key_here
+   ```
+   *(See `.env.example` for reference)*
+
+4. **Run the development server**:
+   ```bash
+   npm run dev
+   ```
+
+5. **Build for production**:
+   ```bash
+   npm run build
+   ```
+
+---
+
+## 📁 Project Structure
+
+```text
+├── actions/          # Server actions (Email handling)
+├── app/              # Next.js App Router (Localized /[locale] routes)
+├── components/       # Reusable React components & UI kits
+├── locales/          # Translation JSON files (EN, AR, DE)
+├── public/           # Static assets (CV, Images)
+└── lib/              # Utility functions & shared config
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🤝 Contact
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**MohammedNader AlGhussin**  
+Full-Stack Developer  
+📍 Cairo, Egypt (Remote Friendly)  
+📧 [mohammendnaderalghussin@gmail.com](mailto:mohammendnaderalghussin@gmail.com)  
+🔗 [LinkedIn](https://www.linkedin.com/in/mohammednader-alghussin) | [GitHub](https://github.com/MohammedNaderAlGhussin)
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+*Designed and engineered with passion.*
