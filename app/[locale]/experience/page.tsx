@@ -8,52 +8,31 @@ import { Badge } from "@/components/ui/badge";
 
 export default function Experience() {
   const { t, i18n } = useTranslation("common");
-  const isRtl = i18n.language === "ar";
+  const isRtl = i18n.dir() === "rtl";
 
   const timeline = [
     {
-      role: String(t("experience.1.role", "Senior UI Designer")),
-      company: String(t("experience.1.company", "DesignFlow Studio")),
-      date: String(t("experience.1.date", "2021 - Present")),
-      desc: String(
-        t(
-          "experience.1.desc",
-          "Leading the design system initiative for Fortune 500 clients. Specialized in rapid prototyping and high-fidelity mockups.",
-        ),
-      ),
+      role: String(t("experience.1.role")),
+      company: String(t("experience.1.company")),
+      date: String(t("experience.1.date")),
+      type: String(t("experience.1.type")),
+      desc: String(t("experience.1.desc")),
     },
     {
-      role: String(t("experience.2.role", "Product Developer")),
-      company: String(t("experience.2.company", "TechNova Systems")),
-      date: String(t("experience.2.date", "2018 - 2021")),
-      desc: String(
-        t(
-          "experience.2.desc",
-          "Engineered responsive front-end components using React and Tailwind CSS. Reduced average page load time by 40%.",
-        ),
-      ),
+      role: String(t("experience.2.role")),
+      company: String(t("experience.2.company")),
+      date: String(t("experience.2.date")),
+      type: String(t("experience.2.type")),
+      desc: String(t("experience.2.desc")),
+      status: String(t("experience.2.status")),
+      isActive: true,
     },
     {
-      role: String(t("experience.3.role", "Frontend Engineer")),
-      company: String(t("experience.3.company", "WebSphere Solutions")),
-      date: String(t("experience.3.date", "2015 - 2018")),
-      desc: String(
-        t(
-          "experience.3.desc",
-          "Built progressive web applications and optimized legacy monolithic dashboards into React SPAs.",
-        ),
-      ),
-    },
-    {
-      role: String(t("experience.4.role", "Junior Web Developer")),
-      company: String(t("experience.4.company", "Digital Horizon")),
-      date: String(t("experience.4.date", "2013 - 2015")),
-      desc: String(
-        t(
-          "experience.4.desc",
-          "Maintained enterprise CMS installations and custom WordPress plugin development.",
-        ),
-      ),
+      role: String(t("experience.3.role")),
+      company: String(t("experience.3.company")),
+      date: String(t("experience.3.date")),
+      type: String(t("experience.3.type")),
+      desc: String(t("experience.3.desc")),
     },
   ];
 
@@ -124,7 +103,8 @@ export default function Experience() {
                   className="w-full md:w-[45%] pl-8 md:pl-0 rtl:pr-8 rtl:md:pr-0 rtl:pl-0"
                 >
                   <Card
-                    className={`relative bg-card/40 backdrop-blur-xl border-border/10 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl group rounded-3xl p-1
+                    className={`relative bg-card/40 backdrop-blur-xl border-border/10 transition-all duration-500 hover:shadow-2xl group rounded-3xl p-1
+                    ${item.isActive ? "border-primary/40 shadow-[0_0_30px_rgba(0,194,255,0.15)] ring-1 ring-primary/20" : "hover:border-primary/30"}
                     ${!isLeft ? "md:text-left rtl:md:text-right" : "md:text-right rtl:md:text-left"}
                   `}
                   >
@@ -135,22 +115,41 @@ export default function Experience() {
                       <div
                         className={`flex flex-col mb-4 ${!isLeft ? "items-start" : "items-end"}`}
                       >
-                        <Badge
-                          variant="secondary"
-                          className="bg-primary/10 text-primary border border-primary/20 font-black uppercase tracking-widest px-4 py-1 mb-4"
-                        >
-                          {item.date}
-                        </Badge>
-                        <h3 className="text-2xl md:text-3xl font-black group-hover:text-primary transition-colors font-heading">
-                          {item.role}
-                        </h3>
-                        <p className="text-xl font-bold text-primary/80 font-body">
-                          {item.company}
-                        </p>
+                        <div className={`flex items-center gap-3 mb-4 ${isRtl ? "flex-row-reverse" : "flex-row"}`}>
+                          <Badge
+                            variant="secondary"
+                            className="bg-primary/10 text-primary border border-primary/20 font-black uppercase tracking-widest px-4 py-1"
+                          >
+                            {item.date}
+                          </Badge>
+                          {item.isActive && (
+                            <div className="flex items-center gap-2">
+                              <span className="relative flex h-3 w-3">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                              </span>
+                              <Badge className="bg-cyan-500/10 text-cyan-400 border-cyan-500/20 font-bold px-2 py-0.5 text-[10px] uppercase tracking-tighter">
+                                {item.status}
+                              </Badge>
+                            </div>
+                          )}
+                        </div>
+                        
+                        <div className={`flex flex-col ${!isLeft ? "items-start" : "items-end"}`}>
+                          <Badge variant="outline" className="mb-2 text-[10px] uppercase font-bold border-primary/20 text-primary/60">
+                            {item.type}
+                          </Badge>
+                          <h3 className="text-2xl md:text-3xl font-black group-hover:text-primary transition-colors font-heading leading-tight">
+                            {item.role}
+                          </h3>
+                          <p className="text-xl font-bold text-primary/80 font-body mt-1">
+                            {item.company}
+                          </p>
+                        </div>
                       </div>
 
                       <div className="pt-4 border-t border-border/10">
-                        <p className="text-muted-foreground leading-relaxed text-lg font-body">
+                        <p className={`text-muted-foreground leading-relaxed text-lg font-body ${isRtl ? "text-right" : "text-left"}`}>
                           {item.desc}
                         </p>
                       </div>
