@@ -10,7 +10,6 @@ import {
   Github,
   Linkedin,
   Mail,
-  Twitter,
   MapPin,
   Loader2,
   Send,
@@ -111,33 +110,45 @@ export default function Contact() {
               </motion.h2>
 
               <div className="space-y-12">
-                {[
-                  { icon: MapPin, label: "Location", val: "Gaza, Palestine" },
-                  { icon: Mail, label: "Email", val: "hello@mohammed.dev" },
-                ].map((item, i) => (
-                  <motion.div
-                    key={i}
-                    variants={itemVariants}
-                    className="flex items-start gap-6 group"
-                  >
-                    <div className="p-4 bg-primary/10 rounded-[1.5rem] border border-primary/20 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
-                      <item.icon className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <h3 className="text-xs font-black text-muted-foreground uppercase tracking-widest mb-1">
-                        {String(
-                          t(
-                            `contact.info.${item.label.toLowerCase()}`,
-                            item.label,
-                          ),
-                        )}
-                      </h3>
-                      <p className="text-xl md:text-2xl font-bold font-body">
-                        {item.val}
-                      </p>
-                    </div>
-                  </motion.div>
-                ))}
+                <motion.div
+                  variants={itemVariants}
+                  className="flex items-start gap-6 group"
+                >
+                  <div className="p-4 bg-primary/10 rounded-[1.5rem] border border-primary/20 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+                    <MapPin className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-xs font-black text-muted-foreground uppercase tracking-widest mb-1">
+                      {String(t("contact.info.location", "LOCATION"))}
+                    </h3>
+                    <p className="text-xl md:text-2xl font-bold font-body">
+                      {String(t("contact.info.location.val"))}
+                    </p>
+                    <p className="text-sm text-muted-foreground mt-1 font-body">
+                      {String(t("contact.info.location.sub"))}
+                    </p>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  variants={itemVariants}
+                  className="flex items-start gap-6 group"
+                >
+                  <div className="p-4 bg-primary/10 rounded-[1.5rem] border border-primary/20 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+                    <Mail className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-xs font-black text-muted-foreground uppercase tracking-widest mb-1">
+                      {String(t("contact.info.email", "EMAIL"))}
+                    </h3>
+                    <a
+                      href={`mailto:${t("contact.info.email.val")}`}
+                      className="text-xl md:text-2xl font-bold font-body hover:text-primary transition-colors"
+                    >
+                      {String(t("contact.info.email.val"))}
+                    </a>
+                  </div>
+                </motion.div>
               </div>
 
               <motion.div variants={itemVariants} className="pt-12 space-y-6">
@@ -145,13 +156,18 @@ export default function Contact() {
                   {String(t("contact.social.title", "Digital Presence"))}
                 </h3>
                 <div className="flex gap-4">
-                  {[Linkedin, Github, Twitter].map((Icon, i) => (
+                  {[
+                    { Icon: Linkedin, href: "https://linkedin.com/in/mohammednaderalghussin" },
+                    { Icon: Github, href: "https://github.com/MohammedNaderAlGhussin" },
+                  ].map((social, i) => (
                     <Link
                       key={i}
-                      href="#"
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="p-5 bg-card border border-border/50 rounded-2xl hover:border-primary/50 hover:bg-primary/5 hover:scale-110 transition-all duration-300"
                     >
-                      <Icon className="h-6 w-6" />
+                      <social.Icon className="h-6 w-6" />
                     </Link>
                   ))}
                 </div>
@@ -161,12 +177,7 @@ export default function Contact() {
                 <Card className="bg-primary/5 border-primary/10 shadow-2xl rounded-[2rem] overflow-hidden">
                   <CardContent className="p-10">
                     <p className="text-xl font-medium leading-relaxed font-body">
-                      {String(
-                        t(
-                          "contact.availability",
-                          "I'm currently looking for new full-time roles or freelance projects. I usually respond within 12-24 hours. Let's build something amazing together!",
-                        ),
-                      )}
+                      {String(t("contact.availability"))}
                     </p>
                   </CardContent>
                 </Card>
@@ -191,7 +202,7 @@ export default function Contact() {
                           {String(t("contact.form.name", "Your Name"))}
                         </label>
                         <Input
-                          placeholder="John Doe"
+                          placeholder={String(t("contact.form.name.placeholder", "Enter your name"))}
                           className="h-16 bg-background/50 border-border/50 focus-visible:ring-primary focus-visible:border-primary transition-all text-lg px-6 rounded-2xl font-body"
                           {...form.register("name")}
                         />
@@ -208,7 +219,7 @@ export default function Contact() {
                         </label>
                         <Input
                           type="email"
-                          placeholder="hello@example.com"
+                          placeholder={String(t("contact.form.email.placeholder", "Enter your email"))}
                           className="h-16 bg-background/50 border-border/50 focus-visible:ring-primary focus-visible:border-primary transition-all text-lg px-6 rounded-2xl font-body"
                           {...form.register("email")}
                         />
@@ -224,7 +235,7 @@ export default function Contact() {
                           {String(t("contact.form.message", "Message"))}
                         </label>
                         <Textarea
-                          placeholder="Tell me about your project..."
+                          placeholder={String(t("contact.form.message.placeholder", "Write your message"))}
                           className="min-h-[200px] bg-background/50 border-border/50 focus-visible:ring-primary focus-visible:border-primary transition-all text-lg p-6 rounded-2xl font-body resize-none"
                           {...form.register("message")}
                         />
