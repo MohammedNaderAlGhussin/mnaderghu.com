@@ -33,8 +33,8 @@ export default function Home() {
           >
             <div className="mb-4">
               <TextGenerateEffect
-                words={String(t("home.title", "Nader"))}
-                className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-black tracking-tighter text-foreground mb-4 font-heading"
+                words={String(t("home.title"))}
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter text-foreground mb-4 font-heading"
               />
             </div>
 
@@ -74,12 +74,13 @@ export default function Home() {
                 {String(t("home.cta.projects", "View Projects"))}
                 <ArrowRight className="ml-2 h-4 w-4 rtl:rotate-180 rtl:ml-0 rtl:mr-2" />
               </Link>
-              <Link
-                href={`/${i18n.language}/contact`}
+              <a
+                href="/cv.pdf"
+                download="MohammedNader-CV.pdf"
                 className="inline-flex h-12 md:h-14 items-center justify-center rounded-full border border-primary/20 bg-background/50 backdrop-blur-sm px-10 text-sm md:text-base font-bold shadow-sm transition-all hover:bg-secondary hover:text-foreground hover:scale-105"
               >
-                {String(t("home.cta.contact", "Get in Touch"))}
-              </Link>
+                {String(t("home.cta.contact", "Download CV"))}
+              </a>
             </motion.div>
           </motion.div>
         </div>
